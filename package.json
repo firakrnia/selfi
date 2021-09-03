@@ -1,0 +1,19 @@
+{
+  "name": "project_selfi",
+  "version": "1.0.0",
+  "description": "aplikasi selfi",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/firakrnia/project_selfi.git"
+  },
+  "author": "firakrnia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/firakrnia/project_selfi/issues"
+  },
+  "homepage": "https://github.com/firakrnia/project_selfi#readme"
+}
