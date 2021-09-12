@@ -1,29 +1,9 @@
-const mysql = require('mysql');
+const sequelize = require("sequelize");
 
-const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "selfi"
+const db = new sequelize("selfi", "root", "", {
+  dialect: "mysql"
 });
 
-Connection.connect(function(error){
-    if (error) throw error
-    else console.log ("koneksi berhasil")
-})
-// db.connect(function(err) {
-//     if (err) throw err;
-//     console.log("Connected!");
-// });
+db.sync({});
 
-// module.exports= db;
-
-// const sequelize = require("sequelize");
-
-// const db = new sequelize("selfi", "root", "", {
-//   dialect: "mysql"
-// });
-
-// db.sync({});
-
-// module.exports = db;
+module.exports = db;
