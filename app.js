@@ -1,10 +1,14 @@
 const express = require('express');
-const app = express();
 const User = require("./models/user");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const passportJWT = require("passport-jwt");
 
+const app = express();
+
+const db = require("./config/database");
+
+db.authenticate().then(() => console.log("db berhasil terkoneksi"));
 
 let ExtractJwt = passportJWT.ExtractJwt;
 let JwtStrategy = passportJWT.Strategy; 
@@ -31,14 +35,12 @@ const getUser = async obj => {
     });
 };
 
-const db = require("./config/database");
-
+//ini midddleware
 app.use(express.urlencoded({extended: true}));
 
-db.authenticate().then(() => console.log("db berhasil terkoneksi"));
-app.get('/', (req, res) => res.send("node bisa dibuka di rest api"));
+app.get('/selfi', (req, res) => res.send("Selamat datang di Selfi"));
 
-app.post('/login', async(req, res) => {
+app.post('/selfi/login', async(req, res) => {
     try {
         const{ nis, password} = req.body;
 
@@ -65,7 +67,8 @@ app.post('/login', async(req, res) => {
     }
 });
 
-app.get('/protected', passport.authenticate("jwt", {session: false}), (req, res) => {
+//url ke menu profil
+app.get('/selfi/profil', passport.authenticate("jwt", {session: false}), (req, res) => {
     try {
         res.send("Selamat anda bisa mengakses route ini dengan passportjs");
     }catch(err){
@@ -75,7 +78,8 @@ app.get('/protected', passport.authenticate("jwt", {session: false}), (req, res)
     
 });
 
-app.get('/dikunci', passport.authenticate("jwt", {session: false}), (req, res) => {
+// url menu utama
+app.get('/selfi/utama', passport.authenticate("jwt", {session: false}), (req, res) => {
     try {
         res.send("Selamat anda bisa mengakses route ini dengan passportjs");
     }catch(err){
@@ -85,11 +89,11 @@ app.get('/dikunci', passport.authenticate("jwt", {session: false}), (req, res) =
     
 });
 
-app.post('/register', async(req, res) => {
+app.post('/selfi/register', async(req, res) => {
     try{
-        const {nis, password} = req.body;
+        const {nis, nama, kelas, jurusan, nohp, password} = req.body;
         const newUser = new User({
-            nis, password
+            nis, nama, kelas, jurusan, nohp, password
         })
         await newUser.save();
          res.json(newUser);
