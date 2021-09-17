@@ -12,7 +12,6 @@ const Konseling = require("./models/konseling")
 const app = express();
 
 const db = require("./config/database");
-const konseling = require('./models/konseling');
 
 db.authenticate().then(() => console.log("db berhasil terkoneksi"));
 
