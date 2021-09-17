@@ -9,7 +9,9 @@ const Admin = database.define (
         keahlian : {type: Sequelize.STRING(25)}
 
     },
-    {freezeTableName : true}
+    {   freezeTableName : true,
+        timestamps: false
+    }
 );
 
 Admin.sync({});
