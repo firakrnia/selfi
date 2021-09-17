@@ -7,10 +7,12 @@ const User = require("./models/user");
 const Admin = require("./models/admin");
 const Target = require("./models/target");
 const Buku = require("./models/buku");
+const Konseling = require("./models/konseling")
 
 const app = express();
 
 const db = require("./config/database");
+const konseling = require('./models/konseling');
 
 db.authenticate().then(() => console.log("db berhasil terkoneksi"));
 
@@ -210,6 +212,28 @@ app.post('/selfi/target', async (req, res) => {
         })
         await newTarget.save();
         res.json(newTarget);
+    } catch (err) {
+        console.error(err.message);
+        resizeTores.status(500).send("server error");
+    }
+});
+
+app.post('/selfi/konseling', async (req, res) => {
+    try {
+        const {
+            id_konseling,
+            nama_guru,
+            hp_guru,
+            jenis_konseling
+        } = req.body;
+        const newKonseling = new Konseling({
+            id_konseling,
+            nama_guru,
+            hp_guru,
+            jenis_konseling
+        })
+        await newKonseling.save();
+        res.json(newKonseling);
     } catch (err) {
         console.error(err.message);
         resizeTores.status(500).send("server error");
