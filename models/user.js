@@ -12,7 +12,9 @@ const User = database.define (
         password: { type: Sequelize.STRING},
 
     },
-    {freezeTableName : true}
+    {   freezeTableName : true,
+        timestamps: false
+    }
 );
 
 User.sync({});
