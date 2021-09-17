@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require("./models/user");
+const Admin = require("./models/admin")
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const passportJWT = require("passport-jwt");
@@ -97,6 +98,20 @@ app.post('/selfi/register', async(req, res) => {
         })
         await newUser.save();
          res.json(newUser);
+    }catch (err){
+        console.error(err.message);
+        resizeTores.status(500).send("server error");
+    }
+});
+
+app.post('/selfi/admin', async(req, res) => {
+    try{
+        const {hp_guru, nama_guru, keahlian} = req.body;
+        const newAdmin = new Admin({
+            hp_guru, nama_guru, keahlian
+        })
+        await newAdmin.save();
+         res.json(newAdmin);
     }catch (err){
         console.error(err.message);
         resizeTores.status(500).send("server error");
