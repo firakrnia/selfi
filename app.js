@@ -5,9 +5,8 @@ const passportJWT = require("passport-jwt");
 
 const User = require("./models/user");
 const Admin = require("./models/admin");
-const Target = require("./models/target");
-const Buku = require("./models/buku");
-const Konseling = require("./models/konseling")
+const Konseling = require("./models/konseling");
+// const Perpustakaan = require("./models/perpustakaan");
 
 const app = express();
 
@@ -177,7 +176,7 @@ app.post('/selfi/buku/tambah', passport.authenticate("jwt", {
             sampul_buku,
             lampiran_buku
         } = req.body;
-        const newBuku = new Buku({
+        const newBuku = new Admin.buku({
             id_buku,
             hp_guru,
             judul_buku,
@@ -195,6 +194,47 @@ app.post('/selfi/buku/tambah', passport.authenticate("jwt", {
     }
 });
 
+// app.post('/selfi/belajar', passport.authenticate("jwt", {
+//     session: false
+// }), async (req, res) => {
+//     try {
+//         const {
+//             id_buku,
+//             nis
+//         } = req.body;
+//         const newBuku = new Admin.buku({
+//             id_buku,
+//             nis
+//         })
+//         await newAdmin.save();
+//         res.json(newBuku);
+//     } catch (err) {
+//         console.error(err.message);
+//         resizeTores.status(500).send("server error");
+//     }
+// });
+
+app.post('/selfi/motivasi/tambah', async (req, res) => {
+    try {
+        const {
+            hp_guru,
+            judul_artikel,
+            deskripsi_artikel,
+            kategori_artikel
+        } = req.body;
+        const newMotivasi = new Admin.motivasi({
+            hp_guru,
+            judul_artikel,
+            deskripsi_artikel,
+            kategori_artikel
+        })
+        await newMotivasi.save();
+        res.json(newMotivasi);
+    } catch (err) {
+        console.error(err.message);
+        resizeTores.status(500).send("server error");
+    }
+});
 app.post('/selfi/target', async (req, res) => {
     try {
         const {
@@ -203,7 +243,7 @@ app.post('/selfi/target', async (req, res) => {
             judul_target,
             deskripsi_target
         } = req.body;
-        const newTarget = new Target({
+        const newTarget = new User.target({
             id_target,
             nis,
             judul_target,
@@ -211,6 +251,51 @@ app.post('/selfi/target', async (req, res) => {
         })
         await newTarget.save();
         res.json(newTarget);
+    } catch (err) {
+        console.error(err.message);
+        resizeTores.status(500).send("server error");
+    }
+});
+
+//blom tau gimana table nya
+app.post('/selfi/jadwal', async (req, res) => {
+    try {
+        const {
+            id_target,
+            nis,
+            judul_target,
+            deskripsi_target
+        } = req.body;
+        const newTarget = new User.target({
+            id_target,
+            nis,
+            judul_target,
+            deskripsi_target
+        })
+        await newTarget.save();
+        res.json(newTarget);
+    } catch (err) {
+        console.error(err.message);
+        resizeTores.status(500).send("server error");
+    }
+});
+
+app.post('/selfi/todolist', async (req, res) => {
+    try {
+        const {
+            id_kegiatan,
+            nis,
+            tanggal,
+            jam
+        } = req.body;
+        const newTodolist = new User.Todolist({
+            id_kegiatan,
+            nis,
+            tanggal,
+            jam
+        })
+        await newTodolist.save();
+        res.json(newTodolist);
     } catch (err) {
         console.error(err.message);
         resizeTores.status(500).send("server error");
@@ -238,6 +323,7 @@ app.post('/selfi/konseling', async (req, res) => {
         resizeTores.status(500).send("server error");
     }
 });
+
 app.listen(4500, () => {
     console.log(`Server started on 4500`);
 });
