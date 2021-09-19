@@ -98,46 +98,46 @@ app.post('/selfi/login/siswa', async (req, res) => {
     }
 });
 
-// app.post('/selfi/login/admin', async (req, res) => {
-//     try {
-//         const {
-//             username,
-//             password
-//         } = req.body;
+app.post('/selfi/login/admin', async (req, res) => {
+    try {
+        const {
+            username,
+            password
+        } = req.body;
 
-//         if (username && password) {
-//             let admin = await getAdmin({
-//                 username: username
-//             });
+        if (username && password) {
+            let admin = await getAdmin({
+                username: username
+            });
 
-//             if (!admin) {
-//                 res.status(401).json({
-//                     message: "username salah atau anda belum terdaftar"
-//                 });
-//             }
+            if (!admin) {
+                res.status(401).json({
+                    message: "username salah atau anda belum terdaftar"
+                });
+            }
 
-//             if (admin.password === password) {
-//                 let payload = {
-//                     id: admin.id
-//                 };
+            if (admin.password === password) {
+                let payload = {
+                    id: admin.id
+                };
 
-//                 let token = jwt.sign(payload, jwtOptions.secretOrKey);
+                let token = jwt.sign(payload, jwtOptions.secretOrKey);
 
-//                 res.json({
-//                     msg: "oke berhasil login",
-//                     token: token
-//                 });
-//             } else {
-//                 res.status(401).json({
-//                     message: "password salah"
-//                 });
-//             }
-//         }
-//     } catch (err) {
-//         console.error(err.message);
-//         resizeTores.status(500).send("server error");
-//     }
-// });
+                res.json({
+                    msg: "oke berhasil login",
+                    token: token
+                });
+            } else {
+                res.status(401).json({
+                    message: "password salah"
+                });
+            }
+        }
+    } catch (err) {
+        console.error(err.message);
+        resizeTores.status(500).send("server error");
+    }
+});
 
 //url ke menu profil
 app.get('/selfi/profil', passport.authenticate("jwt", {
@@ -165,53 +165,53 @@ app.get('/selfi/utama', passport.authenticate("jwt", {
 
 });
 
-// app.post('/selfi/register/siswa', async (req, res) => {
-//     try {
-//         const {
-//             nis,
-//             nama,
-//             kelas,
-//             jurusan,
-//             nohp,
-//             password
-//         } = req.body;
-//         const newUser = new User({
-//             nis,
-//             nama,
-//             kelas,
-//             jurusan,
-//             nohp,
-//             password
-//         })
-//         await newUser.save();
-//         res.json(newUser);
-//     } catch (err) {
-//         console.error(err.message);
-//         resizeTores.status(500).send("server error");
-//     }
-// });
+app.post('/selfi/register/siswa', async (req, res) => {
+    try {
+        const {
+            nis,
+            nama,
+            kelas,
+            jurusan,
+            nohp,
+            password
+        } = req.body;
+        const newSiswa = new modul.siswa({
+            nis,
+            nama,
+            kelas,
+            jurusan,
+            nohp,
+            password
+        })
+        await newSiswa.save();
+        res.json(newSiswa);
+    } catch (err) {
+        console.error(err.message);
+        resizeTores.status(500).send("server error");
+    }
+});
 
-// app.post('/selfi/register/admin', async (req, res) => {
-//     try {
-//         const {
-//             hp_guru,
-//             nama_guru,
-//             username,
-//             password
-//         } = req.body;
-//         const newAdmin = new Admin({
-//             hp_guru,
-//             nama_guru,
-//             username,
-//             password
-//         })
-//         await newAdmin.save();
-//         res.json(newAdmin);
-//     } catch (err) {
-//         console.error(err.message);
-//         resizeTores.status(500).send("server error");
-//     }
-// });
+app.post('/selfi/register/admin', async (req, res) => {
+    try {
+        const {
+            hp_guru,
+            nama_guru,
+            username,
+            password
+        } = req.body;
+        const newAdmin = new Admin({
+            hp_guru,
+            nama_guru,
+            username,
+            password
+        })
+        await newAdmin.save();
+        res.json(newAdmin);
+    } catch (err) {
+        console.error(err.message);
+        resizeTores.status(500).send("server error");
+    }
+});
 
 // buat post buku di menu admin
 app.post('/selfi/buku/tambah', passport.authenticate("jwt", {
