@@ -1,21 +1,36 @@
 const Sequelize = require('sequelize');
 const database = require("../config/database");
-const User = require("./user");
+const siswa = require("./user");
 
-const Target = database.define (
-    "target",
-    {
-        id_target : { type: Sequelize.INTEGER, primaryKey: true},
-        nis : {type: Sequelize.INTEGER},
-        judul_target : {type: Sequelize.STRING(100)},
-        deskripsi_target : {type: Sequelize.STRING(5)},
-    },
-    {freezeTableName : true}
-    
+const target = database.define(
+    "target", {
+        id_target: {
+            type: Sequelize.INTEGER,
+            primaryKey: true
+        },
+        nis: {
+            type: Sequelize.INTEGER
+        },
+        judul_target: {
+            type: Sequelize.STRING(100)
+        },
+        deskripsi_target: {
+            type: Sequelize.STRING(5)
+        },
+    }, {
+        freezeTableName: true,
+        timestamps: false
+    }
+
 );
 
-User.hasMany(Target, {foreignKey: 'nis'});
-Target.hasMany(User, {foreignKey: 'nis'});
-Target.sync({});
+siswa.hasMany(target, {
+    foreignKey: 'nis'
+});
+target.hasMany(siswa, {
+    foreignKey: 'nis'
+});
 
-module.exports = Target;
+target.sync({});
+
+module.exports = target;

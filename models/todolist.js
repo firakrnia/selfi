@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 const database = require("../config/database");
-const User = require("./user");
+const siswa = require("./user");
 
-const Todolist = database.define(
+const todolist = database.define(
     "todolist", {
         id_kegiatan: {
             type: Sequelize.INTEGER,
@@ -25,12 +25,12 @@ const Todolist = database.define(
 
 );
 
-User.hasMany(Target, {
+siswa.hasMany(todolist, {
     foreignKey: 'nis'
 });
-Target.hasMany(User, {
+todolist.hasMany(siswa, {
     foreignKey: 'nis'
 });
-Target.sync({});
+todolist.sync({});
 
-module.exports = Target;
+module.exports = todolist;

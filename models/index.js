@@ -1,0 +1,19 @@
+const siswa = require("./user");
+const admin = require("./admin");
+const todolist = require("./todolist");
+const target = require("./target");
+const buku = require("./buku");
+const konseling = require("./konseling");
+const motivasi = require("./motivasi");
+//const jadwal = require("./jadwal");
+// const perpustakaan = require("./perpustakaan");
+const model = {};
+
+model.siswa = siswa;
+model.admin = admin;
+model.target = target;
+model.todolist = todolist;
+model.buku = buku;
+model.konseling = konseling;
+model.motivasi = motivasi;
+module.exports = model

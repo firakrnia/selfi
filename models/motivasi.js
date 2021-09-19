@@ -2,20 +2,23 @@ const Sequelize = require('sequelize');
 const database = require("../config/database");
 const admin = require("./admin");
 
-const konseling = database.define(
-    "konseling", {
-        id_konseling: {
+const motivasi = database.define(
+    "motivasi", {
+        id_motivasi: {
             type: Sequelize.INTEGER,
             primaryKey: true
         },
         id_guru: {
             type: Sequelize.INTEGER(15)
         },
-        hp_guru: {
-            type: Sequelize.INTEGER(15)
+        judul_artikel: {
+            type: Sequelize.STRING(100)
         },
-        jenis_konseling: {
-            type: Sequelize.STRING(25)
+        deskripsi_artikel: {
+            type: Sequelize.STRING
+        },
+        kategori_artikel: {
+            type: Sequelize.STRING
         }
     }, {
         freezeTableName: true
@@ -23,12 +26,13 @@ const konseling = database.define(
 
 );
 
-admin.hasMany(konseling, {
+admin.hasMany(motivasi, {
     foreignKey: 'id_guru'
 });
-konseling.hasMany(admin, {
+motivasi.hasMany(admin, {
     foreignKey: 'id_guru'
 });
-konseling.sync({});
 
-module.exports = konseling;
+motivasi.sync({});
+
+module.exports = motivasi;
