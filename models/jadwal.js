@@ -1,22 +1,41 @@
 const Sequelize = require('sequelize');
 const database = require("../config/database");
-const User = require("./user");
+const kelas = require("./kelas");
+const mapel = require("./mapel");
 
-const Jadwal = database.define (
-    "jadwal",
-    {
-        id_kegiatan : { type: Sequelize.INTEGER, primaryKey: true},
-        nis : {type: Sequelize.INTEGER},
-        nama_kegiatan : {type: Sequelize.STRING(100)},
-        waktu_kegiatan : {type: Sequelize.STRING(20)},
+const jadwal = database.define(
+    "jadwal", {
+        id_kelas: {
+            type: Sequelize.INTEGER
+        },
+        hari: {
+            type: Sequelize.STRING(100)
+        },
+        id_mapel: {
+            type: Sequelize.INTEGER(100)
+        },
+        waktu_dimulai: {
+            type: Sequelize.TIME
+        },
+        waktu_selesai: {
+            type: Sequelize.TIME
+        },
 
-    },
-    {freezeTableName : true}
-    
+    }, {
+        freezeTableName: true,
+        timestamps: false
+    }
 );
 
-User.hasMany(Target, {foreignKey: 'nis'});
-Target.hasMany(User, {foreignKey: 'nis'});
-Target.sync({});
+kelas.hasMany(jadwal, {
+    foreignKey: 'id_kelas'
+});
 
-module.exports = Target;
+
+mapel.hasMany(jadwal, {
+    foreignKey: 'id_mapel'
+});
+
+jadwal.sync({});
+
+module.exports = jadwal;

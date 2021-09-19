@@ -10,19 +10,18 @@ const perpustakaan = database.define(
             primaryKey: true
         },
         nis: {
-            type: Sequelize.STRING(50)
+            type: Sequelize.INTEGER
         }
 
     }, {
+        freezeTableName: true,
         timestamps: false
     }
 );
 
 siswa.hasMany(perpustakaan, { foreignKey: 'nis' });
-perpustakaan.hasMany(siswa, { foreignKey: 'nis' });
 
 buku.hasMany(perpustakaan, { foreignKey: 'id_buku' });
-perpustakaan.hasMany(buku, { foreignKey: 'id_buku' });
 
 perpustakaan.sync({});
 

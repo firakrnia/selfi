@@ -1,12 +1,14 @@
 const siswa = require("./user");
 const admin = require("./admin");
+const kelas = require("./kelas");
 const todolist = require("./todolist");
 const target = require("./target");
 const buku = require("./buku");
 const konseling = require("./konseling");
 const motivasi = require("./motivasi");
-//const jadwal = require("./jadwal");
-// const perpustakaan = require("./perpustakaan");
+const mapel = require("./mapel");
+const jadwal = require("./jadwal");
+const perpustakaan = require("./perpustakaan");
 const model = {};
 
 model.siswa = siswa;
@@ -16,4 +18,7 @@ model.todolist = todolist;
 model.buku = buku;
 model.konseling = konseling;
 model.motivasi = motivasi;
+model.kelas = kelas;
+model.mapel = mapel;
+model.jadwal = jadwal;
 module.exports = model
