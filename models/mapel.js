@@ -17,13 +17,6 @@ const mapel = database.define(
 
 );
 
-// siswa.hasMany(target, {
-//     foreignKey: 'nis'
-// });
-// target.hasMany(siswa, {
-//     foreignKey: 'nis'
-// });
-
 mapel.sync({});
 
 module.exports = mapel;

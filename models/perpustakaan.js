@@ -6,8 +6,7 @@ const siswa =  require("./user");
 const perpustakaan = database.define(
     "perpustakaan", {
         id_buku: {
-            type: Sequelize.INTEGER(15),
-            primaryKey: true
+            type: Sequelize.INTEGER(15)
         },
         nis: {
             type: Sequelize.INTEGER

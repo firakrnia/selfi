@@ -29,9 +29,6 @@ const motivasi = database.define(
 admin.hasMany(motivasi, {
     foreignKey: 'id_guru'
 });
-motivasi.hasMany(admin, {
-    foreignKey: 'id_guru'
-});
 
 motivasi.sync({});
 

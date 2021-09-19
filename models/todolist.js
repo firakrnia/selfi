@@ -28,9 +28,7 @@ const todolist = database.define(
 siswa.hasMany(todolist, {
     foreignKey: 'nis'
 });
-todolist.hasMany(siswa, {
-    foreignKey: 'nis'
-});
+
 todolist.sync({});
 
 module.exports = todolist;

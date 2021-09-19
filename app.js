@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const passportJWT = require("passport-jwt");
+var port = process.env.PORT || 4500;
 
 // const User = require("./models/user");
 // const Admin = require("./models/admin");
@@ -9,7 +10,7 @@ const passportJWT = require("passport-jwt");
 // const target = require("./models/target");
 //const Konseling = require("./models/konseling");
 // const Perpustakaan = require("./models/perpustakaan");
-const modul = require("./models/index");
+const Modul = require("./models/index");
 
 const app = express();
 
@@ -25,12 +26,12 @@ jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = "kksi_selfi";
 
 let strategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
-    let user = getUser({
+    let siswa = getModel.siswa({
         id: jwt_payload.id
     });
 
-    if (user) {
-        next(null, user);
+    if (siswa) {
+        next(null, siswa);
     } else {
         next(null, false);
     }
@@ -38,8 +39,8 @@ let strategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
 
 passport.use(strategy);
 
-const getUser = async obj => {
-    return await User.findOne({
+const getSiswa = async obj => {
+    return await Modul.siswa.findOne({
         where: obj
     });
 };
@@ -57,6 +58,32 @@ app.use(express.urlencoded({
 
 app.get('/selfi', (req, res) => res.send("Selamat datang di Selfi"));
 
+app.post('/selfi/register/siswa', async (req, res) => {
+    try {
+        const {
+            nis,
+            nama,
+            id_kelas,
+            jurusan,
+            nohp,
+            password
+        } = req.body;
+        const newSiswa = new Modul.siswa({
+            nis,
+            nama,
+            id_kelas,
+            jurusan,
+            nohp,
+            password
+        })
+        await newSiswa.save();
+        res.json(newSiswa);
+    } catch (err) {
+        console.error(err.message);
+        resizeTores.status(500).send("server error");
+    }
+});
+
 app.post('/selfi/login/siswa', async (req, res) => {
     try {
         const {
@@ -65,19 +92,19 @@ app.post('/selfi/login/siswa', async (req, res) => {
         } = req.body;
 
         if (nis && password) {
-            let user = await getUser({
+            let siswa = await getSiswa({
                 nis: nis
             });
 
-            if (!user) {
+            if (!siswa) {
                 res.status(401).json({
                     message: "nis salah atau anda belum terdaftar"
                 });
             }
 
-            if (user.password === password) {
+            if (siswa.password === password) {
                 let payload = {
-                    id: user.id
+                    id: siswa.id
                 };
 
                 let token = jwt.sign(payload, jwtOptions.secretOrKey);
@@ -165,31 +192,7 @@ app.get('/selfi/utama', passport.authenticate("jwt", {
 
 });
 
-app.post('/selfi/register/siswa', async (req, res) => {
-    try {
-        const {
-            nis,
-            nama,
-            kelas,
-            jurusan,
-            nohp,
-            password
-        } = req.body;
-        const newSiswa = new modul.siswa({
-            nis,
-            nama,
-            kelas,
-            jurusan,
-            nohp,
-            password
-        })
-        await newSiswa.save();
-        res.json(newSiswa);
-    } catch (err) {
-        console.error(err.message);
-        resizeTores.status(500).send("server error");
-    }
-});
+
 
 app.post('/selfi/register/admin', async (req, res) => {
     try {
@@ -376,6 +379,4 @@ app.post('/selfi/konseling', async (req, res) => {
     }
 });
 
-app.listen(4500, () => {
-    console.log(`Server started on 4500`);
-});
+app.listen(port);

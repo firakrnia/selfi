@@ -18,7 +18,7 @@ const siswa = database.define(
             type: Sequelize.STRING(20)
         },
         nohp: {
-            type: Sequelize.INTEGER(15)
+            type: Sequelize.STRING(15)
         },
         password: {
             type: Sequelize.STRING
@@ -31,9 +31,6 @@ const siswa = database.define(
 );
 
 kelas.hasMany(siswa, {
-    foreignKey: 'id_kelas'
-});
-siswa.hasMany(kelas, {
     foreignKey: 'id_kelas'
 });
 

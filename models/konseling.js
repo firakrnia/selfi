@@ -11,9 +11,6 @@ const konseling = database.define(
         id_guru: {
             type: Sequelize.INTEGER(15)
         },
-        hp_guru: {
-            type: Sequelize.INTEGER(15)
-        },
         jenis_konseling: {
             type: Sequelize.STRING(25)
         }
@@ -26,9 +23,7 @@ const konseling = database.define(
 admin.hasMany(konseling, {
     foreignKey: 'id_guru'
 });
-konseling.hasMany(admin, {
-    foreignKey: 'id_guru'
-});
+
 konseling.sync({});
 
 module.exports = konseling;

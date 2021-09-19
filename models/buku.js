@@ -39,9 +39,7 @@ const buku = database.define(
 admin.hasMany(buku, {
     foreignKey: 'id_guru'
 });
-buku.hasMany(admin, {
-    foreignKey: 'id_guru'
-});
+
 buku.sync({});
 
 module.exports = buku;

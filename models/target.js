@@ -27,9 +27,6 @@ const target = database.define(
 siswa.hasMany(target, {
     foreignKey: 'nis'
 });
-target.hasMany(siswa, {
-    foreignKey: 'nis'
-});
 
 target.sync({});
 

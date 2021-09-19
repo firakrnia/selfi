@@ -8,7 +8,7 @@ const admin = database.define(
             primaryKey: true
         },
         hp_guru: {
-            type: Sequelize.INTEGER(15)
+            type: Sequelize.STRING(15)
         },
         nama_guru: {
             type: Sequelize.STRING(50)
