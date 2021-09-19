@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const database = require("../config/database");
 
+
 const siswa = database.define(
     "siswa", {
         nis: {
@@ -28,8 +29,6 @@ const siswa = database.define(
         timestamps: false
     }
 );
-
-
 
 // const jadwal = database.define(
 //     "jadwal", {
