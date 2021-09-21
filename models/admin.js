@@ -5,7 +5,8 @@ const admin = database.define(
     "admin", {
         id_guru: {
             type: Sequelize.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoincrement : true
         },
         hp_guru: {
             type: Sequelize.STRING(15)
