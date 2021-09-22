@@ -6,7 +6,8 @@ const target = database.define(
     "target", {
         id_target: {
             type: Sequelize.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         nis: {
             type: Sequelize.INTEGER

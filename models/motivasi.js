@@ -6,7 +6,8 @@ const motivasi = database.define(
     "motivasi", {
         id_motivasi: {
             type: Sequelize.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         id_guru: {
             type: Sequelize.INTEGER(15)

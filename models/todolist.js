@@ -6,7 +6,8 @@ const todolist = database.define(
     "todolist", {
         id_kegiatan: {
             type: Sequelize.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         nis: {
             type: Sequelize.INTEGER

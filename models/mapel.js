@@ -5,7 +5,8 @@ const mapel = database.define(
     "mapel", {
         id_mapel: {
             type: Sequelize.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         nama_mapel: {
             type: Sequelize.STRING(50)

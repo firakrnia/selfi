@@ -5,7 +5,8 @@ const kelas = database.define(
     "kelas", {
         id_kelas: {
             type: Sequelize.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         nama: {
             type: Sequelize.STRING(10)

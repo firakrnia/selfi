@@ -6,7 +6,8 @@ const buku = database.define(
     "buku", {
         id_buku: {
             type: Sequelize.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         id_guru: {
             type: Sequelize.INTEGER(15)
