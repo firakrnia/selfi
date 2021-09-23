@@ -4,13 +4,8 @@ const passport = require("passport");
 const passportJWT = require("passport-jwt");
 var port = process.env.PORT || 4500;
 
-// const User = require("./models/user");
-// const Admin = require("./models/admin");
-// const todolist = require("./models/todolist");
-// const target = require("./models/target");
-//const Konseling = require("./models/konseling");
-// const Perpustakaan = require("./models/perpustakaan");
 const Modul = require("./models/index");
+const RouteSiswa = require("./routes/siswa");
 
 const app = express();
 
@@ -55,34 +50,51 @@ const getAdmin = async obj => {
 app.use(express.urlencoded({
     extended: true
 }));
+app.use(express.json()); 
+
+
+app.use('/selfi', RouteSiswa);
+
+app.use((req, res, next)=>{
+    const error = new Error("Codingan Salah");
+    error.status = 404;
+    next(error);
+});
+
+app.use((error, req, res, next)=>{
+    res.status(error.status||500);
+     res.json({
+         msg: error.message
+     });
+})
 
 app.get('/selfi', (req, res) => res.send("Selamat datang di Selfi"));
 
-app.post('/selfi/register/siswa', async (req, res) => {
-    try {
-        const {
-            nis,
-            nama,
-            id_kelas,
-            jurusan,
-            nohp,
-            password
-        } = req.body;
-        const newSiswa = new Modul.siswa({
-            nis,
-            nama,
-            id_kelas,
-            jurusan,
-            nohp,
-            password
-        })
-        await newSiswa.save();
-        res.json(newSiswa);
-    } catch (err) {
-        console.error(err.message);
-        resizeTores.status(500).send("server error");
-    }
-});
+// app.post('/selfi/register/siswa', async (req, res) => {
+//     try {
+//         const {
+//             nis,
+//             nama,
+//             id_kelas,
+//             jurusan,
+//             nohp,
+//             password
+//         } = req.body;
+//         const newSiswa = new Modul.siswa({
+//             nis,
+//             nama,
+//             id_kelas,
+//             jurusan,
+//             nohp,
+//             password
+//         })
+//         await newSiswa.save();
+//         res.json(newSiswa);
+//     } catch (err) {
+//         console.error(err.message);
+//         resizeTores.status(500).send("server error");
+//     }
+// });
 
 app.post('/selfi/login/siswa', async (req, res) => {
     try {
