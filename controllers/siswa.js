@@ -1,4 +1,5 @@
 const model = require("../models/index");
+const response = require("../response");
 const controller = {};
 
 controller.getAllSiswa = async function (req, res) {

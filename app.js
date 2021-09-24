@@ -96,46 +96,46 @@ app.get('/selfi', (req, res) => res.send("Selamat datang di Selfi"));
 //     }
 // });
 
-app.post('/selfi/login/siswa', async (req, res) => {
-    try {
-        const {
-            nis,
-            password
-        } = req.body;
+// app.post('/login/siswa', async (req, res) => {
+//     try {
+//         const {
+//             nis,
+//             password
+//         } = req.body;
 
-        if (nis && password) {
-            let siswa = await getSiswa({
-                nis: nis
-            });
+//         if (nis && password) {
+//             let siswa = await getSiswa({
+//                 nis: nis
+//             });
 
-            if (!siswa) {
-                res.status(401).json({
-                    message: "nis salah atau anda belum terdaftar"
-                });
-            }
+//             if (!siswa) {
+//                 res.status(401).json({
+//                     message: "nis salah atau anda belum terdaftar"
+//                 });
+//             }
 
-            if (siswa.password === password) {
-                let payload = {
-                    id: siswa.id
-                };
+//             if (siswa.password === password) {
+//                 let payload = {
+//                     id: siswa.id
+//                 };
 
-                let token = jwt.sign(payload, jwtOptions.secretOrKey);
+//                 let token = jwt.sign(payload, jwtOptions.secretOrKey);
 
-                res.json({
-                    msg: "oke",
-                    token: token
-                });
-            } else {
-                res.status(401).json({
-                    message: "password salah"
-                });
-            }
-        }
-    } catch (err) {
-        console.error(err.message);
-        resizeTores.status(500).send("server error");
-    }
-});
+//                 res.json({
+//                     msg: "oke",
+//                     token: token
+//                 });
+//             } else {
+//                 res.status(401).json({
+//                     message: "password salah"
+//                 });
+//             }
+//         }
+//     } catch (err) {
+//         console.error(err.message);
+//         resizeTores.status(500).send("server error");
+//     }
+// });
 
 app.post('/selfi/login/admin', async (req, res) => {
     try {
