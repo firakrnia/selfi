@@ -6,6 +6,8 @@ var port = process.env.PORT || 4500;
 
 const Modul = require("./models/index");
 const RouteSiswa = require("./routes/siswa");
+const routeKonsul = require("./routes/konseling");
+const routeTodolist = require("./routes/todolist");
 
 const app = express();
 
@@ -54,6 +56,8 @@ app.use(express.json());
 
 
 app.use('/selfi', RouteSiswa);
+app.use('/selfi', routeKonsul);
+app.use('/selfi', routeTodolist);
 
 app.use((req, res, next)=>{
     const error = new Error("Codingan Salah");
@@ -63,9 +67,9 @@ app.use((req, res, next)=>{
 
 app.use((error, req, res, next)=>{
     res.status(error.status||500);
-     res.json({
-         msg: error.message
-     });
+    res.json({
+        msg: error.message
+    });
 })
 
 app.get('/selfi', (req, res) => res.send("Selamat datang di Selfi"));
