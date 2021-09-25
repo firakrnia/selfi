@@ -16,7 +16,8 @@ const konseling = database.define(
             type: Sequelize.STRING(25)
         }
     }, {
-        freezeTableName: true
+        freezeTableName: true,
+        timestamps: false
     }
 
 );

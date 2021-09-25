@@ -32,7 +32,8 @@ const buku = database.define(
         }
 
     }, {
-        freezeTableName: true
+        freezeTableName: true,
+        timestamps: false
     }
 
 );

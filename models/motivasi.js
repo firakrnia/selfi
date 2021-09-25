@@ -22,9 +22,9 @@ const motivasi = database.define(
             type: Sequelize.STRING
         }
     }, {
-        freezeTableName: true
+        freezeTableName: true,
+        timestamps: false
     }
-
 );
 
 admin.hasMany(motivasi, {
