@@ -26,6 +26,7 @@ controller.post = async function(req, res) {
     try {
         let todolist = await model.todolist.create({
             nama_kegiatan: req.body.id_kegiatan,
+            nis: req.body.nis,
             tanggal: req.body.tanggal,
             jam: req.body.jam
         })
