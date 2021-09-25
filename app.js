@@ -49,7 +49,6 @@ const getAdmin = async obj => {
     });
 };
 
-//ini midddleware
 app.use(express.urlencoded({
     extended: true
 }));
@@ -75,73 +74,6 @@ app.use((error, req, res, next)=>{
 })
 
 app.get('/selfi', (req, res) => res.send("Selamat datang di Selfi"));
-
-// app.post('/selfi/register/siswa', async (req, res) => {
-//     try {
-//         const {
-//             nis,
-//             nama,
-//             id_kelas,
-//             jurusan,
-//             nohp,
-//             password
-//         } = req.body;
-//         const newSiswa = new Modul.siswa({
-//             nis,
-//             nama,
-//             id_kelas,
-//             jurusan,
-//             nohp,
-//             password
-//         })
-//         await newSiswa.save();
-//         res.json(newSiswa);
-//     } catch (err) {
-//         console.error(err.message);
-//         resizeTores.status(500).send("server error");
-//     }
-// });
-
-// app.post('/login/siswa', async (req, res) => {
-//     try {
-//         const {
-//             nis,
-//             password
-//         } = req.body;
-
-//         if (nis && password) {
-//             let siswa = await getSiswa({
-//                 nis: nis
-//             });
-
-//             if (!siswa) {
-//                 res.status(401).json({
-//                     message: "nis salah atau anda belum terdaftar"
-//                 });
-//             }
-
-//             if (siswa.password === password) {
-//                 let payload = {
-//                     id: siswa.id
-//                 };
-
-//                 let token = jwt.sign(payload, jwtOptions.secretOrKey);
-
-//                 res.json({
-//                     msg: "oke",
-//                     token: token
-//                 });
-//             } else {
-//                 res.status(401).json({
-//                     message: "password salah"
-//                 });
-//             }
-//         }
-//     } catch (err) {
-//         console.error(err.message);
-//         resizeTores.status(500).send("server error");
-//     }
-// });
 
 app.post('/selfi/login/admin', async (req, res) => {
     try {
