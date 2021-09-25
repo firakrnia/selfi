@@ -9,6 +9,9 @@ const todolist = database.define(
             primaryKey: true,
             autoIncrement: true
         },
+        nama_kegiatan: {
+            type: Sequelize.STRING,
+        },
         nis: {
             type: Sequelize.INTEGER
         },
