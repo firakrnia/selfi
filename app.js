@@ -48,7 +48,6 @@ const getAdmin = async obj => {
     });
 };
 
-//ini midddleware
 app.use(express.urlencoded({
     extended: true
 }));
