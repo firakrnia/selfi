@@ -25,9 +25,18 @@ controller.getAllTodolist = async function (req, res) {
 controller.post = async function(req, res) {
     try {
         let todolist = await model.todolist.create({
-            
+            nama_kegiatan: req.body.id_kegiatan,
+            tanggal: req.body.tanggal,
+            jam: req.body.jam
         })
+        res.status(200).json({
+            message: "Berhasil menambahkan todolist",
+            data: todolist
+        });
     } catch (error) {
+        res.status(404).json({
+            message: error.message
+        });
     }
 }
 
