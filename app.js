@@ -8,6 +8,7 @@ const Modul = require("./models/index");
 const RouteSiswa = require("./routes/siswa");
 const routeKonsul = require("./routes/konseling");
 const routeTodolist = require("./routes/todolist");
+const routeTarget = require("./routes/target");
 
 const app = express();
 
@@ -58,6 +59,7 @@ app.use(express.json());
 app.use('/selfi', RouteSiswa);
 app.use('/selfi', routeKonsul);
 app.use('/selfi', routeTodolist);
+app.use("/selfi", routeTarget);
 
 app.use((req, res, next)=>{
     const error = new Error("Codingan Salah");
