@@ -51,13 +51,6 @@ controller.postRegister = async function (req, res) {
     }
 }
 
-// if (err) response.login(false, err.sqlMessage, null, res)
-
-        // else if (siswa.length > 0) response.login(true, "Login Success", rows[0], res)
-        // else response.login(false, "Wrong sername or password", null, res)
-        // else if (rows[0] == null) response.login(false, "Wrong sername or password", null, res)
-        // else response.login(true, "Login Success", rows[0], res)
-
 controller.postLogin = async function (req, res) {
     try {
         const {
@@ -105,27 +98,7 @@ controller.postLogin = async function (req, res) {
         console.error(err.message);
         resizeTores.status(500).send("server error");
     }
-    // try {
-        // let siswa = await model.siswa.findAll()
-        
-    //}
-            // if (siswa.length > 0) {
-            //     res.status(200).json({
-            //         message: "GET Method Siswa",
-            //         data: siswa
-            //     });
-            // } else {
-            //     res.status(200).json({
-            //         message: "Tidak ada data",
-            //         data: []
-            //     });
-
-            // }
-    // } catch (error) {
-    //     res.status(404).json({
-    //         message: error.message
-    //     });
-    // }
+    
 }
 
 module.exports = controller;
