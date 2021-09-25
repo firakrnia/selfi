@@ -3,5 +3,7 @@ const router = express.Router();
 const controller = require("../controllers/index");
 
 router.get('/todolist', controller.todolist.getAllTodolist);
-router.delete('/todolist', controller.todolist.delete);
+router.post('/todolist/tambah', controller.todolist.post);
+router.delete('/todolist/:id_kegiatan', controller.todolist.delete);
+
 module.exports = router;
