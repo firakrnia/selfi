@@ -26,7 +26,6 @@ const todolist = database.define(
         freezeTableName: true,
         timestamps: false
     }
-
 );
 
 siswa.hasMany(todolist, {
