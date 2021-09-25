@@ -4,10 +4,10 @@ const passport = require("passport");
 const passportJWT = require("passport-jwt");
 var port = process.env.PORT || 4500;
 
-const Modul = require("./models/index");
+// const Modul = require("./models/index");
 const RouteSiswa = require("./routes/siswa");
 const routeKonsul = require("./routes/konseling");
-const routeTodolist = require("./routes/todolist");
+// const routeTodolist = require("./routes/todolist");
 
 const app = express();
 
@@ -57,7 +57,7 @@ app.use(express.json());
 
 app.use('/selfi', RouteSiswa);
 app.use('/selfi', routeKonsul);
-app.use('/selfi', routeTodolist);
+// app.use('/selfi', routeTodolist);
 
 app.use((req, res, next)=>{
     const error = new Error("Codingan Salah");
@@ -73,73 +73,6 @@ app.use((error, req, res, next)=>{
 })
 
 app.get('/selfi', (req, res) => res.send("Selamat datang di Selfi"));
-
-// app.post('/selfi/register/siswa', async (req, res) => {
-//     try {
-//         const {
-//             nis,
-//             nama,
-//             id_kelas,
-//             jurusan,
-//             nohp,
-//             password
-//         } = req.body;
-//         const newSiswa = new Modul.siswa({
-//             nis,
-//             nama,
-//             id_kelas,
-//             jurusan,
-//             nohp,
-//             password
-//         })
-//         await newSiswa.save();
-//         res.json(newSiswa);
-//     } catch (err) {
-//         console.error(err.message);
-//         resizeTores.status(500).send("server error");
-//     }
-// });
-
-// app.post('/login/siswa', async (req, res) => {
-//     try {
-//         const {
-//             nis,
-//             password
-//         } = req.body;
-
-//         if (nis && password) {
-//             let siswa = await getSiswa({
-//                 nis: nis
-//             });
-
-//             if (!siswa) {
-//                 res.status(401).json({
-//                     message: "nis salah atau anda belum terdaftar"
-//                 });
-//             }
-
-//             if (siswa.password === password) {
-//                 let payload = {
-//                     id: siswa.id
-//                 };
-
-//                 let token = jwt.sign(payload, jwtOptions.secretOrKey);
-
-//                 res.json({
-//                     msg: "oke",
-//                     token: token
-//                 });
-//             } else {
-//                 res.status(401).json({
-//                     message: "password salah"
-//                 });
-//             }
-//         }
-//     } catch (err) {
-//         console.error(err.message);
-//         resizeTores.status(500).send("server error");
-//     }
-// });
 
 app.post('/selfi/login/admin', async (req, res) => {
     try {
