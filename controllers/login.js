@@ -1,5 +1,4 @@
 const model = require("../models/index");
-// const response =  require("../response");
 const controller = {};
 
 const jwt = require("jsonwebtoken");
