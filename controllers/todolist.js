@@ -28,7 +28,6 @@ controller.post = async function(req, res) {
             
         })
     } catch (error) {
-        
     }
 }
 
