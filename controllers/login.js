@@ -89,14 +89,15 @@ controller.postLogin = async function (req, res) {
                 res.json({
                     message: "login berhasil",
                     token: token,
-                    success: "true"
+                    success: "true",
+                    data: siswa
                 });
             } else {
                 // response.login(false, "password salah", null, res)
                 res.status(401).json({
                     message: "password salah",
                     success: "false",
-                    data: siswa
+                    
                 });
             }
         }
