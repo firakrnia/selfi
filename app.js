@@ -1,65 +1,29 @@
 const express = require('express');
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 const passport = require("passport");
-const passportJWT = require("passport-jwt");
+// const passportJWT = require("passport-jwt");
 var port = process.env.PORT || 4500;
 
-const Modul = require("./models/index");
-const RouteSiswa = require("./routes/siswa");
-const routeKonsul = require("./routes/konseling");
-const routeTodolist = require("./routes/todolist");
-const routeTarget = require("./routes/target");
-
+const route = require("./routes/index");
 const app = express();
 
 const db = require("./config/database");
 
 db.authenticate().then(() => console.log("db berhasil terkoneksi"));
 
-let ExtractJwt = passportJWT.ExtractJwt;
-let JwtStrategy = passportJWT.Strategy;
-
-let jwtOptions = {};
-jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = "kksi_selfi";
-
-let strategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
-    let siswa = getModel.siswa({
-        id: jwt_payload.id
-    });
-
-    if (siswa) {
-        next(null, siswa);
-    } else {
-        next(null, false);
-    }
-});
-
-passport.use(strategy);
-
-const getSiswa = async obj => {
-    return await Modul.siswa.findOne({
-        where: obj
-    });
-};
-
-const getAdmin = async obj => {
-    return await Admin.findOne({
-        where: obj
-    });
-};
+// const getAdmin = async obj => {
+//     return await Admin.findOne({
+//         where: obj
+//     });
+// };
 
 app.use(express.urlencoded({
     extended: true
 }));
+
 app.use(express.json()); 
 
-
-app.use('/selfi', RouteSiswa);
-app.use('/selfi', routeKonsul);
-app.use('/selfi', routeTodolist);
-app.use("/selfi", routeTarget);
-
+//handling error endpoint
 app.use((req, res, next)=>{
     const error = new Error("Codingan Salah");
     error.status = 404;
@@ -72,6 +36,18 @@ app.use((error, req, res, next)=>{
         msg: error.message
     });
 })
+
+app.use('/selfi', route.siswa);
+
+app.use('/selfi', route.auth);
+
+app.use('/selfi', route.konseling);
+
+app.use('/selfi', route.todolist);
+
+app.use("/selfi", route.target);
+
+
 
 app.get('/selfi', (req, res) => res.send("Selamat datang di Selfi"));
 

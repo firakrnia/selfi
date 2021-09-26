@@ -31,6 +31,7 @@ controller.post = async function(req, res) {
             jam: req.body.jam
         })
         res.status(200).json({
+            success: "true",
             message: "Berhasil menambahkan todolist",
             data: todolist
         });

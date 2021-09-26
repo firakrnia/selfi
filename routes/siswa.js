@@ -4,9 +4,6 @@ const controller = require("../controllers/index");
 
 router.get('/siswa', controller.siswa.getAllSiswa);
 
-router.post('/register/siswa', controller.auth.postRegister)
-router.post('/login/siswa', controller.auth.postLogin);
-
 router.get('/siswa/:nis', controller.siswa.getIdSiswa);
 
 router.put('/siswa', (req, res, next) => {
