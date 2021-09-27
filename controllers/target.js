@@ -30,6 +30,7 @@ controller.post = async function(req, res) {
             deskripsi_target: req.body.deskripsi_target
         })
         res.status(200).json({
+            success: "true",
             message: "Berhasil menambahkan target",
             data: target
         });
