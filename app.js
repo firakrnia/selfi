@@ -58,7 +58,7 @@ app.use(express.json());
 app.use('/selfi', RouteSiswa);
 app.use('/selfi', routeKonsul);
 app.use('/selfi', routeTodolist);
-app.use("/selfi", routeTarget);
+app.use("/selfi/target", routeTarget);
 
 app.use((req, res, next)=>{
     const error = new Error("Codingan Salah");

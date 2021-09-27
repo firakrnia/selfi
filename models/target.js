@@ -16,7 +16,7 @@ const target = database.define(
             type: Sequelize.STRING(100)
         },
         deskripsi_target: {
-            type: Sequelize.STRING(5)
+            type: Sequelize.STRING(500)
         },
     }, {
         freezeTableName: true,

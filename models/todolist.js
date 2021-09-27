@@ -13,10 +13,10 @@ const todolist = database.define(
             type: Sequelize.STRING,
         },
         nis: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
         },
         tanggal: {
-            type: Sequelize.DATE
+            type: Sequelize.DATEONLY
         },
         jam: {
             type: Sequelize.TIME

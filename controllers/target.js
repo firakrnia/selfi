@@ -25,9 +25,9 @@ controller.getAllTarget = async function (req, res) {
 controller.post = async function(req, res) {
     try {
         let target = await model.target.create({
+            nis: req.body.nis,
             judul_target: req.body.judul_target,
-            deskripsi_target: req.body.deskripsi_target,
-            nis: req.body.nis
+            deskripsi_target: req.body.deskripsi_target
         })
         res.status(200).json({
             message: "Berhasil menambahkan target",
