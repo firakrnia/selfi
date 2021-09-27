@@ -21,14 +21,12 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-<<<<<<< HEAD
 app.use('/selfi', RouteSiswa);
 app.use('/selfi', routeKonsul);
 app.use('/selfi', routeTodolist);
 app.use("/selfi/target", routeTarget);
-=======
+
 app.use(express.json()); 
->>>>>>> 88bcef843f8eeacc6eeda80e40cfc1a176305e77
 
 //handling error endpoint
 app.use((req, res, next)=>{
