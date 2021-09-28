@@ -6,11 +6,13 @@ controller.getAllKonsul = async function (req, res) {
         let konsul = await model.konseling.findAll()
             if (konsul.length > 0) {
                 res.status(200).json({
+                    success: "true",
                     message: 'GET Method Konsul',
                     data: konsul
                 });
             } else { 
                 res.status(200).json({
+                    success: "false",
                     message: "Tidak ada data",
                     data : []
                 });

@@ -39,6 +39,7 @@ controller.postRegister = async function (req, res) {
             password: req.body.password
         })
             res.status(200).json({
+                success: "true",
                 message: "Data siswa berhasil ditambahkan",
                 data: siswa
             })
@@ -63,7 +64,6 @@ controller.postLogin = async function (req, res) {
             });
             
             if (!siswa) {
-                // response.login(false, "nis salah atau anda belum terdaftar", null, res)
                 res.status(401).json({
                     message: "nis salah atau anda belum terdaftar",
                     success: "false"
@@ -77,7 +77,6 @@ controller.postLogin = async function (req, res) {
                 };
 
                 let token = jwt.sign(payload, jwtOptions.secretOrKey);
-                // response.login(true, "Login Berhasil", siswa[0], token, res)
                 res.json({
                     message: "login berhasil",
                     token: token,
@@ -85,7 +84,6 @@ controller.postLogin = async function (req, res) {
                     data: siswa
                 });
             } else {
-                // response.login(false, "password salah", null, res)
                 res.status(401).json({
                     message: "password salah",
                     success: "false",

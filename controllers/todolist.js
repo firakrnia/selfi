@@ -6,11 +6,13 @@ controller.getAllTodolist = async function (req, res) {
         let todolist = await model.todolist.findAll()
             if (todolist.length > 0) {
                 res.status(200).json({
+                    success: "true",
                     message: "GET Method todolist",
                     data: todolist
                 });
             } else {
                 res.status(200).json({
+                    success: "false",
                     message: "Tidak ada data",
                     data: []
                 });
@@ -44,12 +46,13 @@ controller.post = async function(req, res) {
 
 controller.delete = async function(req, res) {
     try {
-        let todolist = await model.todolist.destroy({
+        await model.todolist.destroy({
             where : {
                 id_kegiatan: req.params.id_kegiatan
             }
         })
         res.status(200).json({
+            success: "true",
             message: "Berhasil Hapus Data Todolist"
         })
     } catch(error) {

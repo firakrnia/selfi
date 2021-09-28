@@ -1,5 +1,4 @@
 const model = require("../models/index");
-const response = require("../response");
 const controller = {};
 
 controller.getAllSiswa = async function (req, res) {
@@ -7,11 +6,13 @@ controller.getAllSiswa = async function (req, res) {
         let siswa = await model.siswa.findAll()
             if (siswa.length > 0) {
                 res.status(200).json({
+                    success: "true",
                     message: "GET Method Siswa",
                     data: siswa
                 });
             } else {
                 res.status(200).json({
+                    success: "false",
                     message: "Tidak ada data",
                     data: []
                 });
@@ -33,11 +34,13 @@ controller.getIdSiswa = async function (req, res) {
         })
             if (siswa.length > 0) {
                 res.status(200).json({
+                    success: "true",
                     message: "Data Siswa Ditemukan",
                     data: siswa
                 });
             } else {
                 res.status(200).json({
+                    success: "false",
                     message: "Data Siswa Tidak Ditemukan",
                     data: []
                 });
@@ -49,7 +52,5 @@ controller.getIdSiswa = async function (req, res) {
         });
     }
 }
-
-module.exports = controller;
 
 module.exports = controller;

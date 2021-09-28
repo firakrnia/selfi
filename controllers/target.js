@@ -6,11 +6,13 @@ controller.getAllTarget = async function (req, res) {
         let target = await model.target.findAll()
         if (target.length > 0) {
             res.status(200).json({
+                success: "true",
                 message: "GET Method Target",
                 data: target
             });
         } else {
             res.status(200).json({
+                success: "false",
                 message: "Tidak ada data",
                 data: []
             });
@@ -43,12 +45,13 @@ controller.post = async function(req, res) {
 
 controller.delete = async function(req, res){
     try {
-        let target = await model.target.destroy({
+        await model.target.destroy({
             where: {
                 id_target: req.params.id_target
             }
         })
         res.status(200).json({
+            success: "true",
             message: "Berhasil Hapus Data Target"
         });
     } catch (error) {
