@@ -5,28 +5,26 @@ const passport = require("passport");
 var port = process.env.PORT || 4500;
 
 const route = require("./routes/index");
+const db = require("./config/database");
 const app = express();
 
-const db = require("./config/database");
-
 db.authenticate().then(() => console.log("db berhasil terkoneksi"));
-
-// const getAdmin = async obj => {
-//     return await Admin.findOne({
-//         where: obj
-//     });
-// };
 
 app.use(express.urlencoded({
     extended: true
 }));
 
-app.use('/selfi', RouteSiswa);
-app.use('/selfi', routeKonsul);
-app.use('/selfi', routeTodolist);
-app.use("/selfi/target", routeTarget);
-
 app.use(express.json()); 
+
+app.use('/selfi', route.siswa);
+
+app.use('/selfi', route.auth);
+
+app.use('/selfi', route.konseling);
+
+app.use('/selfi', route.todolist);
+
+app.use("/selfi", route.target);
 
 //handling error endpoint
 app.use((req, res, next)=>{
@@ -41,18 +39,6 @@ app.use((error, req, res, next)=>{
         msg: error.message
     });
 })
-
-app.use('/selfi', route.siswa);
-
-app.use('/selfi', route.auth);
-
-app.use('/selfi', route.konseling);
-
-app.use('/selfi', route.todolist);
-
-app.use("/selfi", route.target);
-
-
 
 app.get('/selfi', (req, res) => res.send("Selamat datang di Selfi"));
 
