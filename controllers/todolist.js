@@ -33,7 +33,7 @@ controller.post = async function(req, res) {
             jam: req.body.jam
         })
         res.status(200).json({
-            success: "true",
+            success: true,
             message: "Berhasil menambahkan todolist",
             data: todolist
         });
@@ -52,7 +52,7 @@ controller.delete = async function(req, res) {
             }
         })
         res.status(200).json({
-            success: "true",
+            success: true,
             message: "Berhasil Hapus Data Todolist"
         })
     } catch(error) {

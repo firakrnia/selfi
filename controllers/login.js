@@ -39,7 +39,7 @@ controller.postRegister = async function (req, res) {
             password: req.body.password
         })
             res.status(200).json({
-                success: "true",
+                success: true,
                 message: "Data siswa berhasil ditambahkan",
                 data: siswa
             })
@@ -66,7 +66,7 @@ controller.postLogin = async function (req, res) {
             if (!siswa) {
                 res.status(401).json({
                     message: "nis salah atau anda belum terdaftar",
-                    success: "false"
+                    success: false
             
                 });
             }
@@ -80,13 +80,13 @@ controller.postLogin = async function (req, res) {
                 res.json({
                     message: "login berhasil",
                     token: token,
-                    success: "true",
+                    success: true,
                     data: siswa
                 });
             } else {
                 res.status(401).json({
                     message: "password salah",
-                    success: "false",
+                    success: false,
                     
                 });
             }

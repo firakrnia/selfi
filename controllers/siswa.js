@@ -6,13 +6,13 @@ controller.getAllSiswa = async function (req, res) {
         let siswa = await model.siswa.findAll()
             if (siswa.length > 0) {
                 res.status(200).json({
-                    success: "true",
+                    success: true,
                     message: "GET Method Siswa",
                     data: siswa
                 });
             } else {
                 res.status(200).json({
-                    success: "false",
+                    success: false,
                     message: "Tidak ada data",
                     data: []
                 });
