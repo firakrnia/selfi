@@ -55,7 +55,7 @@ controller.postLogin = async function (req, res) {
 
                 });
             }
-            const validPwd = bcrypt.compare(req.body.password, siswa.password);
+            const validPwd = await bcrypt.compare(req.body.password, siswa.password);
             if (!validPwd) {
                 return res.status(400).json({
                     status: res.statusCode,
