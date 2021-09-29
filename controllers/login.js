@@ -23,11 +23,11 @@ controller.postRegister = async function (req, res) {
             nohp: req.body.nohp,
             password: hashPassword
         })
-            res.status(200).json({
-                success: true,
-                message: "Data siswa berhasil ditambahkan",
-                data: siswa
-            })
+        res.status(200).json({
+            success: true,
+            message: "Data siswa berhasil ditambahkan",
+            data: siswa
+        })
 
     } catch (error) {
         res.status(404).json({
@@ -47,27 +47,26 @@ controller.postLogin = async function (req, res) {
             let siswa = await getSiswa({
                 nis: nis
             });
-            
+
             if (!siswa) {
                 res.status(401).json({
                     message: "nis salah atau anda belum terdaftar",
                     success: false
-            
+
                 });
             }
-
-            if (siswa.password === password) {
+            const validPwd = bcrypt.compare(req.body.password, siswa.password);
+            if (!validPwd) {
+                return res.status(400).json({
+                    status: res.statusCode,
+                    message: 'Password Anda Salah!'
+                })
+            } else {
                 res.json({
                     message: "login berhasil",
                     token: generateToken(siswa),
                     success: true,
                     data: siswa
-                });
-            } else {
-                res.status(401).json({
-                    message: "password salah",
-                    success: false,
-                    
                 });
             }
         }
@@ -75,10 +74,10 @@ controller.postLogin = async function (req, res) {
         console.error(err.message);
         resizeTores.status(500).send("server error");
     }
-    
+
 }
 
-function generateToken(siswa){
+function generateToken(siswa) {
     let payload = {
         data: siswa.id
     };
