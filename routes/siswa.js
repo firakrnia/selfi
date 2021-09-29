@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const controller = require("../controllers/index");
-// const middleware = require("../middleware/auth");
 
 router.get('/siswa', controller.siswa.getAllSiswa);
 

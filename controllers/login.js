@@ -57,11 +57,6 @@ controller.postLogin = async function (req, res) {
             }
 
             if (siswa.password === password) {
-                // let payload = {
-                //     id: siswa.id
-                // };
-
-                // let token = jwt.sign(payload, jwtOptions.secretOrKey);
                 res.json({
                     message: "login berhasil",
                     token: generateToken(siswa),
