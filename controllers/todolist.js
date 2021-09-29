@@ -24,6 +24,29 @@ controller.getAllTodolist = async function (req, res) {
     }
 }
 
+controller.getTodolistLength = async function (req, res) {
+    try {
+        let todolist = await model.todolist.findAll()
+            if (todolist.length > 0) {
+                res.status(200).json({
+                    success: "true",
+                    message: "GET Method todolist",
+                    data: todolist.length
+                });
+            } else {
+                res.status(200).json({
+                    success: "false",
+                    message: "Tidak ada data",
+                    data: []
+                });
+            }
+    } catch (error) {
+        res.status(404).json({
+            message: error.message
+        });
+    }
+}
+
 controller.post = async function(req, res) {
     try {
         let todolist = await model.todolist.create({
