@@ -1,12 +1,11 @@
 const express = require('express');
-// const jwt = require("jsonwebtoken");
-const passport = require("passport");
-// const passportJWT = require("passport-jwt");
 var port = process.env.PORT || 4500;
 
 const route = require("./routes/index");
 const db = require("./config/database");
 const app = express();
+const middleware = require("./middleware/auth");
+
 
 db.authenticate().then(() => console.log("db berhasil terkoneksi"));
 
@@ -16,77 +15,61 @@ app.use(express.urlencoded({
 
 app.use(express.json()); 
 
-app.use('/selfi', route.siswa);
-
 app.use('/selfi', route.auth);
 
-app.use('/selfi', route.konseling);
+app.use('/selfi', middleware, route.siswa);
 
-app.use('/selfi', route.todolist);
+app.use('/selfi', middleware, route.konseling);
 
-app.use("/selfi", route.target);
+app.use('/selfi', middleware, route.todolist);
 
-//handling error endpoint
-app.use((req, res, next)=>{
-    const error = new Error("Codingan Salah");
-    error.status = 404;
-    next(error);
-});
-
-app.use((error, req, res, next)=>{
-    res.status(error.status||500);
-    res.json({
-        msg: error.message
-    });
-})
+app.use("/selfi", middleware, route.target);
 
 app.get('/selfi', (req, res) => res.send("Selamat datang di Selfi"));
 
-app.post('/selfi/login/admin', async (req, res) => {
-    try {
-        const {
-            username,
-            password
-        } = req.body;
+// app.post('/selfi/login/admin', async (req, res) => {
+//     try {
+//         const {
+//             username,
+//             password
+//         } = req.body;
 
-        if (username && password) {
-            let admin = await getAdmin({
-                username: username
-            });
+//         if (username && password) {
+//             let admin = await getAdmin({
+//                 username: username
+//             });
 
-            if (!admin) {
-                res.status(401).json({
-                    message: "username salah atau anda belum terdaftar"
-                });
-            }
+//             if (!admin) {
+//                 res.status(401).json({
+//                     message: "username salah atau anda belum terdaftar"
+//                 });
+//             }
 
-            if (admin.password === password) {
-                let payload = {
-                    id: admin.id
-                };
+//             if (admin.password === password) {
+//                 let payload = {
+//                     id: admin.id
+//                 };
 
-                let token = jwt.sign(payload, jwtOptions.secretOrKey);
+//                 let token = jwt.sign(payload, jwtOptions.secretOrKey);
 
-                res.json({
-                    msg: "oke berhasil login",
-                    token: token
-                });
-            } else {
-                res.status(401).json({
-                    message: "password salah"
-                });
-            }
-        }
-    } catch (err) {
-        console.error(err.message);
-        resizeTores.status(500).send("server error");
-    }
-});
+//                 res.json({
+//                     msg: "oke berhasil login",
+//                     token: token
+//                 });
+//             } else {
+//                 res.status(401).json({
+//                     message: "password salah"
+//                 });
+//             }
+//         }
+//     } catch (err) {
+//         console.error(err.message);
+//         resizeTores.status(500).send("server error");
+//     }
+// });
 
 //url ke menu profil
-app.get('/selfi/profil', passport.authenticate("jwt", {
-    session: false
-}), (req, res) => {
+app.get('/selfi/profil', middleware, (req, res) => {
     try {
         res.send("Selamat anda bisa mengakses route ini dengan passportjs");
     } catch (err) {
@@ -97,17 +80,15 @@ app.get('/selfi/profil', passport.authenticate("jwt", {
 });
 
 // url menu utama
-app.get('/selfi/utama', passport.authenticate("jwt", {
-    session: false
-}), (req, res) => {
-    try {
-        res.send("Selamat datang di menu utama SELFI");
-    } catch (err) {
-        console.error(err.message);
-        resizeTores.status(500).send("server error");
-    }
+// app.get('/selfi/utama', middleware, (req, res) => {
+//     try {
+//         res.send("Selamat datang di menu utama SELFI");
+//     } catch (err) {
+//         console.error(err.message);
+//         resizeTores.status(500).send("server error");
+//     }
 
-});
+// });
 
 
 
@@ -134,37 +115,35 @@ app.post('/selfi/register/admin', async (req, res) => {
 });
 
 // buat post buku di menu admin
-app.post('/selfi/buku/tambah', passport.authenticate("jwt", {
-    session: false
-}), async (req, res) => {
-    try {
-        const {
-            id_buku,
-            id_guru,
-            judul_buku,
-            deskripsi_buku,
-            penulis_buku,
-            kategori_buku,
-            sampul_buku,
-            lampiran_buku
-        } = req.body;
-        const newBuku = new Admin.buku({
-            id_buku,
-            id_guru,
-            judul_buku,
-            deskripsi_buku,
-            penulis_buku,
-            kategori_buku,
-            sampul_buku,
-            lampiran_buku
-        })
-        await newAdmin.save();
-        res.json(newBuku);
-    } catch (err) {
-        console.error(err.message);
-        resizeTores.status(500).send("server error");
-    }
-});
+// app.post('/selfi/buku/tambah', middleware, async (req, res) => {
+//     try {
+//         const {
+//             id_buku,
+//             id_guru,
+//             judul_buku,
+//             deskripsi_buku,
+//             penulis_buku,
+//             kategori_buku,
+//             sampul_buku,
+//             lampiran_buku
+//         } = req.body;
+//         const newBuku = new Admin.buku({
+//             id_buku,
+//             id_guru,
+//             judul_buku,
+//             deskripsi_buku,
+//             penulis_buku,
+//             kategori_buku,
+//             sampul_buku,
+//             lampiran_buku
+//         })
+//         await newAdmin.save();
+//         res.json(newBuku);
+//     } catch (err) {
+//         console.error(err.message);
+//         resizeTores.status(500).send("server error");
+//     }
+// });
 
 // app.post('/selfi/belajar', passport.authenticate("jwt", {
 //     session: false
@@ -207,27 +186,6 @@ app.post('/selfi/motivasi/tambah', async (req, res) => {
         resizeTores.status(500).send("server error");
     }
 });
-app.post('/selfi/target', async (req, res) => {
-    try {
-        const {
-            id_target,
-            nis,
-            judul_target,
-            deskripsi_target
-        } = req.body;
-        const newTarget = new User.target({
-            id_target,
-            nis,
-            judul_target,
-            deskripsi_target
-        })
-        await newTarget.save();
-        res.json(newTarget);
-    } catch (err) {
-        console.error(err.message);
-        resizeTores.status(500).send("server error");
-    }
-});
 
 //blom tau gimana table nya
 // app.post('/selfi/jadwal', async (req, res) => {
@@ -246,28 +204,6 @@ app.post('/selfi/target', async (req, res) => {
 //         })
 //         await newTarget.save();
 //         res.json(newTarget);
-//     } catch (err) {
-//         console.error(err.message);
-//         resizeTores.status(500).send("server error");
-//     }
-// });
-
-// app.post('/selfi/todolist', async (req, res) => {
-//     try {
-//         const {
-//             id_kegiatan,
-//             nis,
-//             tanggal,
-//             jam
-//         } = req.body;
-//         const newTodolist = new User.Todolist({
-//             id_kegiatan,
-//             nis,
-//             tanggal,
-//             jam
-//         })
-//         await newTodolist.save();
-//         res.json(newTodolist);
 //     } catch (err) {
 //         console.error(err.message);
 //         resizeTores.status(500).send("server error");
@@ -295,5 +231,19 @@ app.post('/selfi/konseling', async (req, res) => {
         resizeTores.status(500).send("server error");
     }
 });
+
+//handling error endpoint
+app.use((req, res, next)=>{
+    const error = new Error("Codingan Salah");
+    error.status = 404;
+    next(error);
+});
+
+app.use((error, req, res, next)=>{
+    res.status(error.status||500);
+    res.json({
+        msg: error.message
+    });
+})
 
 app.listen(port);

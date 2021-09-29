@@ -1,27 +1,10 @@
 const model = require("../models/index");
+const bcrypt = require("bcryptjs");
 const controller = {};
 
 const jwt = require("jsonwebtoken");
-const passport = require("passport");
-const passportJWT = require("passport-jwt");
-let ExtractJwt = passportJWT.ExtractJwt;
-let JwtStrategy = passportJWT.Strategy;
-let jwtOptions = {};
-jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = "kksi_selfi";
+const tokenSecret = "kksi_selfi";
 
-let strategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
-    let siswa = getModel.siswa({
-        id: jwt_payload.id
-    });
-
-    if (siswa) {
-        next(null, siswa);
-    } else {
-        next(null, false);
-    }
-});
-passport.use(strategy);
 const getSiswa = async obj => {
     return await model.siswa.findOne({
         where: obj
@@ -29,6 +12,8 @@ const getSiswa = async obj => {
 };
 
 controller.postRegister = async function (req, res) {
+    const salt = bcrypt.genSaltSync(10);
+    const hashPassword = await bcrypt.hash(req.body.password, salt);
     try {
         let siswa = await model.siswa.create({
             nis: req.body.nis,
@@ -36,7 +21,7 @@ controller.postRegister = async function (req, res) {
             id_kelas: req.body.id_kelas,
             jurusan: req.body.jurusan,
             nohp: req.body.nohp,
-            password: req.body.password
+            password: hashPassword
         })
             res.status(200).json({
                 success: true,
@@ -72,14 +57,14 @@ controller.postLogin = async function (req, res) {
             }
 
             if (siswa.password === password) {
-                let payload = {
-                    id: siswa.id
-                };
+                // let payload = {
+                //     id: siswa.id
+                // };
 
-                let token = jwt.sign(payload, jwtOptions.secretOrKey);
+                // let token = jwt.sign(payload, jwtOptions.secretOrKey);
                 res.json({
                     message: "login berhasil",
-                    token: token,
+                    token: generateToken(siswa),
                     success: true,
                     data: siswa
                 });
@@ -96,6 +81,13 @@ controller.postLogin = async function (req, res) {
         resizeTores.status(500).send("server error");
     }
     
+}
+
+function generateToken(siswa){
+    let payload = {
+        data: siswa.id
+    };
+    return jwt.sign(payload, tokenSecret);
 }
 
 module.exports = controller;
