@@ -1,18 +1,20 @@
 const model = require("../models/index");
+const sequelize = require('sequelize');
 const controller = {};
 
 
-controller.getIdSiswa = async function (req, res) {
+controller.getAllJadwal = async function (req, res) {
     try {
         let siswa = await model.jadwal.findAll({
-            where: {
-                hari: req.params.nis
-            }
+            where:{
+                
+            },
+            order: sequelize.col('waktu_dimulai'),
         })
             if (siswa.length > 0) {
                 res.status(200).json({
                     success: "true",
-                    message: "Data Siswa Ditemukan",
+                    message: "Get Jadwal",
                     data: siswa
                 });
             } else {
