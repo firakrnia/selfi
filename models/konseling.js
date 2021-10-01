@@ -11,9 +11,6 @@ const konseling = database.define(
         },
         id_guru: {
             type: Sequelize.INTEGER(15)
-        },
-        jenis_konseling: {
-            type: Sequelize.STRING(25)
         }
     }, {
         freezeTableName: true,
