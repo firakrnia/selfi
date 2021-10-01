@@ -3,7 +3,11 @@ const controller = {};
 
 controller.getAllTarget = async function (req, res) {
     try {
-        let target = await model.target.findAll()
+        let target = await model.target.findAll({
+            where: {
+                nis: req.params.nis
+            }
+        })
         if (target.length > 0) {
             res.status(200).json({
                 success: true,
