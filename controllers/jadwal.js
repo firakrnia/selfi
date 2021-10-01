@@ -1,26 +1,27 @@
 const model = require("../models/index");
-const sequelize = require('sequelize');
+// const sequelize = require('sequelize');
 const controller = {};
 
 
 controller.getAllJadwal = async function (req, res) {
     try {
-        let siswa = await model.jadwal.findAll({
+        let jadwal = await model.jadwal.findAll({
+            include: [{model: model.mapel}],
             where:{
-                
+                hari: req.params.hari
             },
-            order: sequelize.col('waktu_dimulai'),
+            order: [["waktu_dimulai", "ASC"]],
         })
-            if (siswa.length > 0) {
+            if (jadwal.length > 0) {
                 res.status(200).json({
                     success: "true",
                     message: "Get Jadwal",
-                    data: siswa
+                    data: jadwal
                 });
             } else {
                 res.status(200).json({
                     success: "false",
-                    message: "Data Siswa Tidak Ditemukan",
+                    message: "Data Jadwal Tidak Tersedia",
                     data: []
                 });
 

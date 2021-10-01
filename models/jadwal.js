@@ -32,7 +32,16 @@ kelas.hasMany(jadwal, {
 });
 
 
+// jadwal.hasMany(mapel, {
+//     foreignKey: 'id_mapel'
+// });
+// mapel.belongsTo(jadwal, {
+//     foreignKey: 'id_mapel'
+// });
 mapel.hasMany(jadwal, {
+    foreignKey: 'id_mapel'
+});
+jadwal.belongsTo(mapel, {
     foreignKey: 'id_mapel'
 });
 
