@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controller = require("../controllers/index");
 
-router.get('/todolist', controller.todolist.getAllTodolist);
+router.get('/todolist/:nis', controller.todolist.getAllTodolist);
 
 router.get('/todolist/jumlah', controller.todolist.getTodolistLength);
 

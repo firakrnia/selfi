@@ -3,7 +3,11 @@ const controller = {};
 
 controller.getAllTodolist = async function (req, res) {
     try {
-        let todolist = await model.todolist.findAll()
+        let todolist = await model.todolist.findAll({
+            where: {
+                nis: req.params.nis
+            }
+        })
             if (todolist.length > 0) {
                 res.status(200).json({
                     success: "true",

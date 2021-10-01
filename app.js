@@ -25,6 +25,9 @@ app.use('/selfi', middleware, route.todolist);
 
 app.use("/selfi", middleware, route.target);
 
+app.use("/selfi", route.jadwal);
+
+
 app.get('/selfi', (req, res) => res.send("Selamat datang di Selfi"));
 
 //handling error endpoint
