@@ -25,6 +25,8 @@ app.use('/selfi', middleware, route.todolist);
 
 app.use("/selfi", middleware, route.target);
 
+app.use('/selfi', route.motivasi);
+
 app.use("/selfi", route.jadwal);
 
 
