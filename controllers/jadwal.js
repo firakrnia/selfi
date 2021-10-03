@@ -6,7 +6,8 @@ const controller = {};
 controller.getAllJadwal = async function (req, res) {
     try {
         let jadwal = await model.jadwal.findAll({
-            include: [{model: model.mapel}],
+            
+            include: [{model: model.mapel}, {model: model.kelas}],
             where:{
                 hari: req.params.hari
             },
