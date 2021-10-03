@@ -9,9 +9,6 @@ const motivasi = database.define(
             primaryKey: true,
             autoIncrement: true
         },
-        id_guru: {
-            type: Sequelize.INTEGER(15)
-        },
         judul_artikel: {
             type: Sequelize.STRING(100)
         },
@@ -27,9 +24,7 @@ const motivasi = database.define(
     }
 );
 
-admin.hasMany(motivasi, {
-    foreignKey: 'id_guru'
-});
+
 
 motivasi.sync({});
 

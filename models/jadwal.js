@@ -27,10 +27,12 @@ const jadwal = database.define(
     }
 );
 
-kelas.hasMany(jadwal, {
-    foreignKey: 'id_kelas'
-});
-
+// kelas.hasMany(jadwal, {
+//     foreignKey: 'id_kelas'
+// });
+// jadwal.belongsTo(kelas, {
+//     foreignKey: 'id_kelas'
+// });
 
 // jadwal.hasMany(mapel, {
 //     foreignKey: 'id_mapel'
@@ -44,6 +46,13 @@ mapel.hasMany(jadwal, {
 jadwal.belongsTo(mapel, {
     foreignKey: 'id_mapel'
 });
+
+kelas.hasMany(jadwal, {
+    foreignKey: 'id_kelas'
+})
+jadwal.belongsTo(kelas, {
+    foreignKey: 'id_kelas'
+})
 
 jadwal.sync({});
 

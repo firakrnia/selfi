@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const database = require("../config/database");
-const admin = require("./admin");
+// const admin = require("./admin");
 
 const buku = database.define(
     "buku", {
@@ -8,9 +8,6 @@ const buku = database.define(
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
-        },
-        id_guru: {
-            type: Sequelize.INTEGER(15)
         },
         judul_buku: {
             type: Sequelize.STRING(50)
@@ -37,10 +34,6 @@ const buku = database.define(
     }
 
 );
-
-admin.hasMany(buku, {
-    foreignKey: 'id_guru'
-});
 
 buku.sync({});
 
