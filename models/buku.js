@@ -13,7 +13,7 @@ const buku = database.define(
             type: Sequelize.STRING(50)
         },
         deskripsi_buku: {
-            type: Sequelize.STRING(50)
+            type: Sequelize.TEXT
         },
         penulis_buku: {
             type: Sequelize.STRING(50)

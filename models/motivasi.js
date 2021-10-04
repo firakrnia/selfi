@@ -13,7 +13,7 @@ const motivasi = database.define(
             type: Sequelize.STRING(100)
         },
         deskripsi_artikel: {
-            type: Sequelize.STRING
+            type: Sequelize.TEXT
         },
         sampul_artikel: {
             type: Sequelize.STRING

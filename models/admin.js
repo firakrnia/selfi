@@ -11,7 +11,7 @@ const admin = database.define(
         foto: {
             type: Sequelize.STRING
         },
-        nama_guru: {
+        nama: {
             type: Sequelize.STRING(50)
         },
         username: {
