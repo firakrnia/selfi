@@ -5,6 +5,7 @@ const todolist = require("./todolist");
 const target = require("./target");
 const jadwal = require("./jadwal");
 const motivasi = require("./motivasi");
+const buku = require("./buku");
 const controller = {};
 
 controller.siswa = siswa;
@@ -14,6 +15,6 @@ controller.todolist= todolist;
 controller.target = target;
 controller.jadwal = jadwal;
 controller.motivasi = motivasi;
-
+controller.buku = buku;
 
 module.exports = controller;

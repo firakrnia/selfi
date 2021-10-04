@@ -29,6 +29,8 @@ app.use('/selfi', route.motivasi);
 
 app.use("/selfi", route.jadwal);
 
+app.use("/selfi", route.buku);
+
 
 app.get('/selfi', (req, res) => res.send("Selamat datang di Selfi"));
 

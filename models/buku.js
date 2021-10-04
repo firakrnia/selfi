@@ -9,9 +9,6 @@ const buku = database.define(
             primaryKey: true,
             autoIncrement: true
         },
-        id_guru: {
-            type: Sequelize.INTEGER(15)
-        },
         judul_buku: {
             type: Sequelize.STRING(50)
         },
@@ -28,7 +25,7 @@ const buku = database.define(
             type: Sequelize.STRING
         },
         lampiran_buku: {
-            type: Sequelize.BLOB
+            type: Sequelize.STRING
         }
 
     }, {
@@ -37,10 +34,6 @@ const buku = database.define(
     }
 
 );
-
-admin.hasMany(buku, {
-    foreignKey: 'id_guru'
-});
 
 buku.sync({});
 
