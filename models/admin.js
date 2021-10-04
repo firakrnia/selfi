@@ -2,14 +2,14 @@ const Sequelize = require('sequelize');
 const database = require("../config/database");
 
 const admin = database.define(
-    "admin", {
+    "tb_user", {
         id_guru: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        hp_guru: {
-            type: Sequelize.STRING(15)
+        foto: {
+            type: Sequelize.STRING
         },
         nama_guru: {
             type: Sequelize.STRING(50)

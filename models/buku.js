@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const database = require("../config/database");
-const admin = require("./admin");
+// const admin = require("./admin");
 
 const buku = database.define(
     "buku", {

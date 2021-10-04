@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const database = require("../config/database");
-const admin = require("./admin");
 
 const konseling = database.define(
     "konseling", {
@@ -9,8 +8,11 @@ const konseling = database.define(
             primaryKey: true,
             autoIncrement: true
         },
-        id_guru: {
-            type: Sequelize.INTEGER(15)
+        nama: {
+            type: Sequelize.STRING
+        },
+        nohp: {
+            type: Sequelize.STRING
         }
     }, {
         freezeTableName: true,
@@ -19,9 +21,6 @@ const konseling = database.define(
 
 );
 
-admin.hasMany(konseling, {
-    foreignKey: 'id_guru'
-});
 
 konseling.sync({});
 
