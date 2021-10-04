@@ -4,7 +4,7 @@ const controller = require("../controllers/index");
 
 router.get('/todolist/:nis', controller.todolist.getAllTodolist);
 
-router.get('/todolist/jumlah', controller.todolist.getTodolistLength);
+router.get('/todolist/:nis/jumlah', controller.todolist.getTodolistLength);
 
 // router.get('/todolist/selesai', controller.todolist.getCompletedTodolistLength);
 
