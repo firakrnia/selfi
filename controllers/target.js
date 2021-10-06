@@ -8,7 +8,7 @@ controller.getAllTarget = async function (req, res) {
             res.status(200).json({
                 success: true,
                 message: "GET Method Target",
-                data: target
+                target
             });
         } else {
             res.status(200).json({
@@ -35,7 +35,7 @@ controller.getAllTargetByNis = async function (req, res) {
             res.status(200).json({
                 success: true,
                 message: "GET Method Target",
-                data: target
+                target
             });
         } else {
             res.status(200).json({
@@ -61,7 +61,7 @@ controller.post = async function(req, res) {
         res.status(200).json({
             success: "true",
             message: "Berhasil menambahkan target",
-            data: target
+            target
         });
     } catch (error) {
         res.status(404).json({

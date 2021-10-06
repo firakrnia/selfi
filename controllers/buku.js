@@ -10,7 +10,7 @@ controller.getAllBuku = async function (req, res) {
             res.status(200).json9({
                 success: true,
                 message: "GET Method Buku",
-                data: buku
+                buku
             });
         } else {
             res.status(200).json({
@@ -37,7 +37,7 @@ controller.searchBuku = async function(req, res) {
         if (buku.length > 0) {
             res.status(200).json({
                 message: "Buku ditemukan",
-                data: buku
+                buku
             });
         } else {
             res.status(200).json({

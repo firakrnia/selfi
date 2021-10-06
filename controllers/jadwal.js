@@ -17,7 +17,7 @@ controller.getAllJadwal = async function (req, res) {
                 res.status(200).json({
                     success: "true",
                     message: "Get Jadwal",
-                    data: jadwal
+                    jadwal
                 });
             } else {
                 res.status(200).json({

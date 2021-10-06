@@ -8,7 +8,7 @@ controller.getAllKonsul = async function (req, res) {
                 res.status(200).json({
                     success: true,
                     message: 'GET Method Konsul',
-                    data: konsul
+                    konsul
                 });
             } else { 
                 res.status(200).json({
