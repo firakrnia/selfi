@@ -11,6 +11,9 @@ const konseling = database.define(
         nama: {
             type: Sequelize.STRING
         },
+        keahlian: {
+            type: Sequelize.STRING
+        },
         nohp: {
             type: Sequelize.STRING
         }

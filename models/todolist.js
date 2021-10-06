@@ -21,10 +21,16 @@ const todolist = database.define(
         jam: {
             type: Sequelize.TIME
         },
+        status: {
+            type: Sequelize.ENUM('completed', 'on_progress'),
+        }
 
     }, {
         freezeTableName: true,
-        timestamps: false
+        paranoid: true,
+        createdAt: false,
+        updatedAt: false,
+        deletedAt: 'destroyTime'
     }
 );
 
