@@ -4,8 +4,4 @@ const controller = require('../controllers/index');
 
 router.get('/jadwal/:hari', controller.jadwal.getAllJadwal);
 
-router.post('/target/tambah', controller.target.post);
-
-router.delete('/target/:id_target', controller.target.delete);
-
 module.exports = router;
