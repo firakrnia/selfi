@@ -13,7 +13,7 @@ controller.getAllTodolist = async function (req, res) {
             res.status(200).json({
                 success: "true",
                 message: "GET Method todolist",
-                todolist
+                data: todolist
             });
         } else {
             res.status(200).json({
@@ -70,7 +70,7 @@ controller.getTodolistLength = async function (req, res) {
             res.status(200).json({
                 success: "true",
                 message: "GET Method todolist",
-                todolist
+                data: todolist
             });
         } else {
             res.status(200).json({
@@ -120,7 +120,7 @@ controller.post = async function (req, res) {
         res.status(200).json({
             success: true,
             message: "Berhasil menambahkan todolist",
-            todolist
+            data: todolist
         });
     } catch (error) {
         res.status(404).json({

@@ -7,10 +7,10 @@ controller.getAllBuku = async function (req, res) {
             attributes: ["sampul_buku","judul_buku","penulis_buku","lampiran_buku"]
         })
         if (buku.length > 0) {
-            res.status(200).json9({
+            res.status(200).json({
                 success: true,
                 message: "GET Method Buku",
-                buku
+                data: buku
             });
         } else {
             res.status(200).json({
@@ -37,7 +37,7 @@ controller.searchBuku = async function(req, res) {
         if (buku.length > 0) {
             res.status(200).json({
                 message: "Buku ditemukan",
-                buku
+                data: buku
             });
         } else {
             res.status(200).json({

@@ -10,7 +10,7 @@ controller.getAllMotivasi = async function (req, res) {
                 res.status(200).json({
                     success: true,
                     message: 'GET Method Motivasi',
-                    motivasi
+                    data: motivasi
                 });
             } else {
                 res.status(200).json({
@@ -37,7 +37,7 @@ controller.getAllMotivasiById = async function (req, res) {
                 res.status(200).json({
                     success: true,
                     message: 'GET Method Motivasi',
-                    motivasi
+                    data: motivasi
                 });
             } else {
                 res.status(200).json({
