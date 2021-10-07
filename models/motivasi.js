@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const database = require("../config/database");
-const admin = require("./admin");
 
 const motivasi = database.define(
     "motivasi", {
@@ -9,13 +8,13 @@ const motivasi = database.define(
             primaryKey: true,
             autoIncrement: true
         },
-        judul_artikel: {
+        judul: {
             type: Sequelize.STRING(100)
         },
-        deskripsi_artikel: {
+        deskripsi: {
             type: Sequelize.TEXT
         },
-        sampul_artikel: {
+        sampul: {
             type: Sequelize.STRING
         },
     }, {

@@ -9,23 +9,23 @@ const buku = database.define(
             primaryKey: true,
             autoIncrement: true
         },
-        judul_buku: {
+        judul: {
             type: Sequelize.STRING(50)
         },
-        deskripsi_buku: {
+        deskripsi: {
             type: Sequelize.TEXT
         },
-        penulis_buku: {
+        penulis: {
             type: Sequelize.STRING(50)
         },
-        kategori_buku: {
+        kategori: {
             type: Sequelize.STRING(50)
         },
-        sampul_buku: {
+        sampul: {
             type: Sequelize.STRING
         },
-        lampiran_buku: {
-            type: Sequelize.STRING
+        lampiran: {
+            type: Sequelize.BLOB
         }
 
     }, {

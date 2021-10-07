@@ -1,10 +1,11 @@
 const model = require("../models/index");
 const controller = {};
+const {Op} = require("sequelize");
 
 controller.getAllBuku = async function (req, res) {
     try {
         let buku = await model.buku.findAll({
-            attributes: ["sampul_buku","judul_buku","penulis_buku","lampiran_buku"]
+            attributes: ["sampul", "judul", "penulis", "lampiran"]
         })
         if (buku.length > 0) {
             res.status(200).json({
@@ -26,14 +27,65 @@ controller.getAllBuku = async function (req, res) {
     }
 }
 
-controller.searchBuku = async function(req, res) {
+controller.getAllBukuByKategori = async function (req, res) {
+    try {
+        let buku = await model.buku.findAll({
+            attributes: ["sampul", "judul", "penulis", "lampiran"],
+            where: {
+                kategori: req.params.kategori
+            }
+        })
+        if (buku.length > 0) {
+            res.status(200).json({
+                success: true,
+                message: "GET Method Buku",
+                data: buku
+            });
+        } else {
+            res.status(200).json({
+                success: false,
+                message: "Tidak ada data",
+                data: []
+            });
+        }
+    } catch (error) {
+        res.status(404).json({
+            message: error.message
+        });
+    }
+}
+
+controller.getSearch = async function (req, res) {
     const search = req.query.keyword;
     try {
         let buku = await model.buku.findAll({
+            attributes: ["deskripsi","judul","penulis","kategori"],
             where: {
-                [Op.like]: "%" +search+ "%"
+                [Op.or]: [
+                {
+                    judul: {
+                        [Op.like]: "%"+search+"%"
+                    }
+                    
+                },
+                {
+                    deskripsi: {
+                        [Op.like]: "%"+search+"%"
+                    }
+                },
+                {
+                    penulis: {
+                        [Op.like]: "%"+search+"%"
+                    }
+                },
+                {
+                    kategori: {
+                        [Op.like]: "%"+search+"%"
+                    }
+                }]
             }
-        })
+        });
+        
         if (buku.length > 0) {
             res.status(200).json({
                 message: "Buku ditemukan",
