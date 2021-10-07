@@ -1,6 +1,7 @@
 const model = require("../models/index");
 const controller = {};
 const {Op} = require("sequelize");
+const joi = require('joi')
 
 controller.getAllBuku = async function (req, res) {
     try {
