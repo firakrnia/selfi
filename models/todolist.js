@@ -23,6 +23,7 @@ const todolist = database.define(
         },
         status: {
             type: Sequelize.ENUM('completed', 'on_progress'),
+            defaultValue: "on_progress"
         }
 
     }, {
