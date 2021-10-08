@@ -3,29 +3,6 @@ const controller = {};
 
 controller.getAllTarget = async function (req, res) {
     try {
-        let target = await model.target.findAll()
-        if (target.length > 0) {
-            res.status(200).json({
-                success: true,
-                message: "GET Method Target",
-                data: target
-            });
-        } else {
-            res.status(200).json({
-                success: false,
-                message: "Tidak ada data",
-                data: []
-            });
-        }
-    } catch (error) {
-        res.status(404).json({
-            message: error.message
-        });
-    }
-}
-
-controller.getAllTargetByNis = async function (req, res) {
-    try {
         let target = await model.target.findAll({
             where: {
                 nis: req.params.nis
@@ -51,6 +28,33 @@ controller.getAllTargetByNis = async function (req, res) {
     }
 }
 
+// controller.getAllTargetByNis = async function (req, res) {
+//     try {
+//         let target = await model.target.findAll({
+//             where: {
+//                 nis: req.params.nis
+//             }
+//         })
+//         if (target.length > 0) {
+//             res.status(200).json({
+//                 success: true,
+//                 message: "GET Method Target",
+//                 data: target
+//             });
+//         } else {
+//             res.status(200).json({
+//                 success: false,
+//                 message: "Tidak ada data",
+//                 data: []
+//             });
+//         }
+//     } catch (error) {
+//         res.status(404).json({
+//             message: error.message
+//         });
+//     }
+// }
+
 controller.post = async function(req, res) {
     try {
         let target = await model.target.create({
@@ -74,6 +78,7 @@ controller.delete = async function(req, res){
     try {
         await model.target.destroy({
             where: {
+                nis: req.params.nis,
                 id_target: req.params.id_target
             }
         })
