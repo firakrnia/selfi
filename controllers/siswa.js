@@ -3,7 +3,9 @@ const controller = {};
 
 controller.getAllSiswa = async function (req, res) {
     try {
-        let siswa = await model.siswa.findAll()
+        let siswa = await model.siswa.findAll({
+            attributes: ["nis","nama","id_kelas","jurusan","nohp"]
+        })
             if (siswa.length > 0) {
                 res.status(200).json({
                     success: true,
