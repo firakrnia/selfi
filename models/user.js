@@ -34,6 +34,10 @@ kelas.hasMany(siswa, {
     foreignKey: 'id_kelas'
 });
 
+kelas.belongsTo(kelas, {
+    foreignKey: "id_kelas"
+});
+
 siswa.sync({});
 
 module.exports = siswa;
