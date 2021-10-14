@@ -25,7 +25,7 @@ const buku = database.define(
             type: Sequelize.STRING
         },
         lampiran: {
-            type: Sequelize.BLOB
+            type: Sequelize.STRING
         }
 
     }, {
