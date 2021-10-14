@@ -15,7 +15,8 @@ controller.getAllJadwal = async function (req, res) {
         //     attributes: ["hari","waktu_dimulai","waktu_selesai","mapel.nama_mapel","kela.nama"],
         // })
         let hari = req.params.hari;
-        let jadwal = await db.query("SELECT jadwal.hari, jadwal.waktu_dimulai, jadwal.waktu_selesai, jadwal.id_kelas, jadwal.id_mapel, mapel.nama_mapel, kelas.nama FROM jadwal JOIN mapel ON jadwal.id_mapel = mapel.id_mapel JOIN kelas ON jadwal.id_kelas = kelas.id_kelas WHERE jadwal.hari = '"+hari+"'" )
+        let id_kelas = req.params.id_kelas;
+        let jadwal = await db.query("SELECT jadwal.hari, jadwal.waktu_dimulai, jadwal.waktu_selesai, jadwal.id_kelas, jadwal.id_mapel, mapel.nama_mapel, kelas.nama FROM jadwal JOIN mapel ON jadwal.id_mapel = mapel.id_mapel JOIN kelas ON jadwal.id_kelas = kelas.id_kelas WHERE jadwal.hari = '"+hari+"' AND kelas.id_Kelas = '"+id_kelas+"'" )
             if (jadwal.length > 0) {
                 res.status(200).json({
                     success: "true",
