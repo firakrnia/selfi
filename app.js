@@ -31,6 +31,8 @@ app.use("/selfi", route.jadwal);
 
 app.use("/selfi", route.buku);
 
+app.use("/selfi", route.pushNotification);
+
 // app.use('/selfi', middleware, route.siswa);
 
 // app.use('/selfi', middleware, route.konseling);

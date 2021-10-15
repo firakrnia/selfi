@@ -6,6 +6,7 @@ const konseling = require("./konseling");
 const jadwal = require("./jadwal");
 const motivasi = require("./motivasi");
 const buku = require("./buku");
+const pushNotification = require("./pushNotification");
 const route = {};
 
 route.siswa = siswa;
@@ -16,6 +17,7 @@ route.konseling = konseling;
 route.jadwal = jadwal;
 route.motivasi = motivasi;
 route.buku = buku;
+route.pushNotification = pushNotification;
 
 module.exports = route;
 

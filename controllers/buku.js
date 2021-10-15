@@ -1,13 +1,10 @@
 const model = require("../models/index");
 const controller = {};
 const {Op} = require("sequelize");
-const joi = require('joi')
 
 controller.getAllBuku = async function (req, res) {
     try {
-        let buku = await model.buku.findAll({
-            attributes: ["sampul", "judul", "penulis", "lampiran"]
-        })
+        let buku = await model.buku.findAll()
         if (buku.length > 0) {
             res.status(200).json({
                 success: true,
@@ -31,7 +28,6 @@ controller.getAllBuku = async function (req, res) {
 controller.getAllBukuByKategori = async function (req, res) {
     try {
         let buku = await model.buku.findAll({
-            attributes: ["sampul", "judul", "penulis", "lampiran"],
             where: {
                 kategori: req.params.kategori
             }
@@ -56,11 +52,10 @@ controller.getAllBukuByKategori = async function (req, res) {
     }
 }
 
-controller.getSearch = async function (req, res) {
+controller.getSearchBuku = async function (req, res) {
     const search = req.query.keyword;
     try {
         let buku = await model.buku.findAll({
-            attributes: ["deskripsi","judul","penulis","kategori"],
             where: {
                 [Op.or]: [
                 {
@@ -70,12 +65,12 @@ controller.getSearch = async function (req, res) {
                     
                 },
                 {
-                    deskripsi: {
+                    penulis: {
                         [Op.like]: "%"+search+"%"
                     }
                 },
                 {
-                    penulis: {
+                    penerbit: {
                         [Op.like]: "%"+search+"%"
                     }
                 },

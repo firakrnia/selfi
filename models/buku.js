@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const database = require("../config/database");
-// const admin = require("./admin");
 
 const buku = database.define(
     "buku", {
@@ -10,16 +9,16 @@ const buku = database.define(
             autoIncrement: true
         },
         judul: {
-            type: Sequelize.STRING(50)
-        },
-        deskripsi: {
-            type: Sequelize.TEXT
+            type: Sequelize.STRING
         },
         penulis: {
-            type: Sequelize.STRING(50)
+            type: Sequelize.STRING
+        },
+        penerbit: {
+            type: Sequelize.STRING
         },
         kategori: {
-            type: Sequelize.STRING(50)
+            type: Sequelize.STRING
         },
         sampul: {
             type: Sequelize.STRING

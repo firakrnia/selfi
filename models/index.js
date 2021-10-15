@@ -8,7 +8,6 @@ const konseling = require("./konseling");
 const motivasi = require("./motivasi");
 const mapel = require("./mapel");
 const jadwal = require("./jadwal");
-const perpustakaan = require("./perpustakaan");
 const model = {};
 
 model.siswa = siswa;
