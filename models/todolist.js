@@ -16,10 +16,7 @@ const todolist = database.define(
             type: Sequelize.INTEGER,
         },
         tanggal: {
-            type: Sequelize.DATEONLY
-        },
-        jam: {
-            type: Sequelize.TIME
+            type: Sequelize.DATE
         },
         status: {
             type: Sequelize.ENUM('completed', 'on_progress'),

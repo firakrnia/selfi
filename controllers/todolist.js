@@ -2,6 +2,7 @@ const model = require("../models/index");
 const sequelize = require('sequelize');
 const controller = {};
 const { Op } = require("sequelize");
+var cron = require('node-cron');
 
 controller.getAllTodolist = async function (req, res) {
     try {
@@ -29,33 +30,6 @@ controller.getAllTodolist = async function (req, res) {
         });
     }
 }
-
-// controller.getTodolistLength = async function (req, res) {
-//     try {
-//         let todolist = await model.todolist.findAll({
-//             where: {
-//                 nis: req.params.nis
-//             }
-//         })
-//         if (todolist.length > 0) {
-//             res.status(200).json({
-//                 success: "true",
-//                 message: "GET Method todolist",
-//                 data: todolist.length
-//             });
-//         } else {
-//             res.status(200).json({
-//                 success: "false",
-//                 message: "Tidak ada data",
-//                 data: []
-//             });
-//         }
-//     } catch (error) {
-//         res.status(404).json({
-//             message: error.message
-//         });
-//     }
-// }
 
 controller.getUnCompletedTodolist = async function (req, res) {
     try {
@@ -90,13 +64,43 @@ controller.getUnCompletedTodolist = async function (req, res) {
 
 controller.post = async function (req, res) {
     try {
+        let dt = new Date();
+        // const localTime = dt.getTime();
+        // const localOffset = dt.getTimezoneOffset() * 60 * 1000;
+        // const utcTime = localTime + localOffset;
+
+        // const estOffset = getEstOffset()
+        // const ind = utcTime + (60 * 60 * 1000 * estOffset);
+        // const nd = new Date(ind);
+
+        
+        // let LocaleTimeOffset = dt.getTimezoneOffset();
+        // let date = dt.getDate();
+        // let month = dt.getMonth()
+        // let day = dt.getDay();
+        // let hours = dt.getHours();
+        // let minutes = dt.getMinutes();
+
+console.log(dt.  toString());
+
+        // cron.schedule(`* ${minutes} ${hours} ${date} ${month} ${day}`, () => {
+        //     console.log('cron-job jalan');
+        //   });
+
+        // dt.setHours(req.body.jam-LocaleTimeOffset);
+        // dt.setMinutes(req.body.jam-LocaleTimeOffset);
+        // dt.setSeconds(0);
+        // dt.setMilliseconds(0);
+
         let todolist = await model.todolist.create({
             nama_kegiatan: req.body.nama_kegiatan,
             nis: req.body.nis,
-            tanggal: req.body.tanggal,
-            jam: req.body.jam,
+            tanggal: new Date()
+            // jam: req.body.jam,
             // status: "on_progress"
-        })
+        }
+        );
+        
         res.status(200).json({
             success: true,
             message: "Berhasil menambahkan todolist",
@@ -135,13 +139,12 @@ controller.getCompletedTodolist = async function (req, res) {
     try {
         let todolist = await model.todolist.findAll({
             attributes: [
-                [sequelize.fn('COUNT', sequelize.col('status', 'destroyTime')), 'totalKegiatanSelesai'],
+                [sequelize.fn('COUNT', sequelize.col('status')), 'totalKegiatanSelesai'],
               ],
             where: {
                 nis: req.params.nis,
                 [Op.or]: [
-                    { status: "completed" },
-                    { destroyTime: null }
+                    { status: "completed" }
                   ]
             }
         })
