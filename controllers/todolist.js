@@ -64,7 +64,7 @@ controller.getUnCompletedTodolist = async function (req, res) {
 
 controller.post = async function (req, res) {
     try {
-        let dt = new Date();
+        const dt = new Date(req.body.tanggal);
         // const localTime = dt.getTime();
         // const localOffset = dt.getTimezoneOffset() * 60 * 1000;
         // const utcTime = localTime + localOffset;
@@ -95,7 +95,7 @@ console.log(dt.  toString());
         let todolist = await model.todolist.create({
             nama_kegiatan: req.body.nama_kegiatan,
             nis: req.body.nis,
-            tanggal: new Date()
+            tanggal: dt
             // jam: req.body.jam,
             // status: "on_progress"
         }
