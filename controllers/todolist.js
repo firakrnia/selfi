@@ -3,6 +3,7 @@ const sequelize = require('sequelize');
 const controller = {};
 const { Op } = require("sequelize");
 var cron = require('node-cron');
+const schedule = require('node-schedule')
 
 controller.getAllTodolist = async function (req, res) {
     try {
@@ -75,17 +76,17 @@ controller.post = async function (req, res) {
 
         
         // let LocaleTimeOffset = dt.getTimezoneOffset();
-        // let date = dt.getDate();
-        // let month = dt.getMonth()
-        // let day = dt.getDay();
-        // let hours = dt.getHours();
-        // let minutes = dt.getMinutes();
+        let date = dt.getDate();
+        let month = dt.getMonth()
+        let day = dt.getDay();
+        let hours = dt.getHours();
+        let minutes = dt.getMinutes();
 
 console.log(dt.  toString());
 
-        // cron.schedule(`* ${minutes} ${hours} ${date} ${month} ${day}`, () => {
-        //     console.log('cron-job jalan');
-        //   });
+        schedule.scheduleJob(dt, () => {
+            console.log('cron-job jalan');
+          });
 
         // dt.setHours(req.body.jam-LocaleTimeOffset);
         // dt.setMinutes(req.body.jam-LocaleTimeOffset);
@@ -140,7 +141,7 @@ controller.getCompletedTodolist = async function (req, res) {
         let todolist = await model.todolist.findAll({
             attributes: [
                 [sequelize.fn('COUNT', sequelize.col('status')), 'totalKegiatanSelesai'],
-              ],
+            ],
             where: {
                 nis: req.params.nis,
                 [Op.or]: [
