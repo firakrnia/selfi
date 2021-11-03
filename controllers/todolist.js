@@ -3,7 +3,7 @@ const sequelize = require('sequelize');
 const controller = {};
 const { Op } = require("sequelize");
 var cron = require('node-cron');
-const schedule = require('node-schedule')
+const schedule = require('node-schedule');
 
 controller.getAllTodolist = async function (req, res) {
     try {
@@ -66,6 +66,7 @@ controller.getUnCompletedTodolist = async function (req, res) {
 controller.post = async function (req, res) {
     try {
         const dt = new Date(req.body.tanggal);
+        const namaKegiatan = req.body.nama_kegiatan;
         // const localTime = dt.getTime();
         // const localOffset = dt.getTimezoneOffset() * 60 * 1000;
         // const utcTime = localTime + localOffset;
@@ -86,7 +87,7 @@ console.log(dt.  toString());
 
         schedule.scheduleJob(dt, () => {
             console.log('cron-job jalan');
-          });
+        });
 
         // dt.setHours(req.body.jam-LocaleTimeOffset);
         // dt.setMinutes(req.body.jam-LocaleTimeOffset);
@@ -94,7 +95,7 @@ console.log(dt.  toString());
         // dt.setMilliseconds(0);
 
         let todolist = await model.todolist.create({
-            nama_kegiatan: req.body.nama_kegiatan,
+            nama_kegiatan: namaKegiatan,
             nis: req.body.nis,
             tanggal: dt
             // jam: req.body.jam,
